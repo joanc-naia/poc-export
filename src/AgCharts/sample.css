@@ -1,0 +1,20 @@
+table{font-size:13px;font-family:Arial;}
+.bottomborder{margin:0;border-bottom:2px solid #000;color:#333;font-weight:normal; font-size:13px; font-family:Arial;}
+.page{border:2px solid #000;padding:5px; text-align: center; width:80px;}
+.title{font-size:20px; font-weight:bold;}
+.label{font-size:13px;	}
+.label2{font-size:13px; font-weight:bold;	}
+.checklabel{margin:0 5px;}
+.small{font-size:11px;}
+th{font-size:14px; font-weight:bold;}
+.secondtitle{	font-size:16px; font-weight:bold;}
+.margining{padding:2px 0 2px 22px;}
+.red{
+  color:#ff0000;
+}
+.bold{
+  font-weight:bold;
+}
+.green{
+  color:#008000;
+}
