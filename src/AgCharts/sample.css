@@ -1,5 +1,9 @@
-
-table{font-size:13px;font-family:Arial;}
+.chart {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+table{font-size:13px;font-family:Arial;margin: 0 auto;}
 .bottomborder{margin:0;border-bottom:2px solid #000;color:#333;font-weight:normal; font-size:13px; font-family:Arial;}
 .page{border:2px solid #000;padding:5px; text-align: center; width:80px;}
 .title{font-size:20px; font-weight:bold;}
@@ -19,3 +23,4 @@ th{font-size:14px; font-weight:bold;}
 .green{
   color:#008000;
 }
+
