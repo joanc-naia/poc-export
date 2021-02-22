@@ -102,289 +102,38 @@ export default class ChartExample extends Component {
     link.click();
     document.body.removeChild(link);
   }
-
-  exportAsExcel2 = async () => {
-    const preHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><head>${style}</head><body><table><tbody>`;
-    const postHtml = `</tbody></table></body></html>`;
-    const table = document.querySelector('#reportbody');
-    const canvas = document.querySelector('#chart canvas');
-    const testImgRow = `<tr><td><img src="${canvas.toDataURL()}"></td></tr>`;
-    const html = `${preHtml}${table.innerHTML}${testImgRow}${postHtml}`;
-    const url = 'data:application/vnd.ms-excel;base64,' + window.btoa(unescape(encodeURIComponent(html)));
-    let link = document.createElement('A');
-    link.href = url;
-    link.download = 'Document';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
-  exportAsWord2 = async () => {
-    const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title>${style}</head><body>`;
-    const postHtml = "</body></html>";
-    const html = `${preHtml}${document.getElementById('report').innerHTML}${postHtml}`;
-    const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-    let link = document.createElement('A');
-    link.href = url;
-    link.download = 'Document.doc';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
+  handleButtonClick = () => {
+    this.setState(state => {
+      return {
+        open: !state.open,
+      };
+    });
+  };
   render() {
     return (<>
-    <button onClick={this.exportAsExcel}>Export Chart Excel</button>
-    <button onClick={this.exportAsWord}>Export Chart Word</button>
+        <header>
+        <h1>Electrofishing Evaluation Report</h1>
+        <div className='dropdown-pan'>
+        <button type="button" className="dropdownbut" onClick={this.handleButtonClick}>
+        Export <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 490.688 490.688" >
+<path  d="M472.328,120.529L245.213,347.665L18.098,120.529c-4.237-4.093-10.99-3.975-15.083,0.262  c-3.992,4.134-3.992,10.687,0,14.82l234.667,234.667c4.165,4.164,10.917,4.164,15.083,0l234.667-234.667  c4.237-4.093,4.354-10.845,0.262-15.083c-4.093-4.237-10.845-4.354-15.083-0.262c-0.089,0.086-0.176,0.173-0.262,0.262  L472.328,120.529z"/>
+<path d="M245.213,373.415c-2.831,0.005-5.548-1.115-7.552-3.115L2.994,135.633c-4.093-4.237-3.975-10.99,0.262-15.083  c4.134-3.992,10.687-3.992,14.82,0l227.136,227.115l227.115-227.136c4.093-4.237,10.845-4.354,15.083-0.262  c4.237,4.093,4.354,10.845,0.262,15.083c-0.086,0.089-0.173,0.176-0.262,0.262L252.744,370.279  C250.748,372.281,248.039,373.408,245.213,373.415z"/>
+</svg>
+        </button>
+        {this.state.open && (
+    <div className="dropdown">
+      <button onClick={this.exportAsExcel}>Export Chart Excel</button>
+      <button onClick={this.exportAsWord}>Export Chart Word</button>
+    </div>
+  )}
+        </div>
+    </header>
+   
+    
     <div id="chart" className="container">
       <AgChartsReact options={this.state.options} />
     </div>
 
-    <button onClick={this.exportAsExcel2}>Export Report Excel</button>
-    <button onClick={this.exportAsWord2}>Export Report Word</button>
-    <div id="report">
-
-      <table border='0' width='100%' cellpadding='5' cellspacing='0'>
-        <tbody id="reportbody">
-          <tr>
-            <td valign='middle'>
-              <table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                <tr>
-                  <td align='center' valign='middle'><b class='title'>Electrofishing Evaluation Datasheet</b></td>
-                  <td align='right' valign='middle' class='page'>PAGE 1</td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table border='2' bordercolor='#000' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                <tr>
-                  <td>
-                    <table border='0' width='100%' cellpadding='2' cellspacing='15'><tbody>
-                      <tr>
-                        <td width='125' valign='bottom' class='label'>Data Recorded By:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label'>Data Entered By:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label' align='right'>Plan Finisher:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' align='right' class='label'>Follow Up By:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' class='label'>Management Type:</td>
-                        <td colspan='3' class='bottomborder'>Testing</td>
-                        <td width='145' align='right' class='label' >Correspondence Type:</td>
-                        <td colspan='3' class='bottomborder'>Testing</td>
-                      </tr>
-                    </tbody></table>
-                  </td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table border='2' bordercolor='#000' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                <tr>
-                  <td>
-                    <table border='0' width='100%' cellpadding='2' cellspacing='15'><tbody>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Customer:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'>Date:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Primary Contact:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'>Property Name:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='145' valign='bottom' class='label2'>Primary Contact Type:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'>State/County:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Work Phone:</td>
-                        <td><table width='100%' cellpadding='0' cellspacing='0'><tbody>
-                          <tr><td class='bottomborder'>Testing</td><td class='label2' width='40' align='center'>Ext:</td><td class='bottomborder'>Testing</td></tr>
-                        </tbody></table></td>
-                        <td width='125' valign='bottom' class='label2'>Primary Uses:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Home Phone:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'>Fishing Goals:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Cell Phone:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'>Property Type:</td>
-                        <td class='bottomborder'>Testing</td>
-                      </tr>
-                      <tr>
-                        <td width='125' valign='bottom' class='label2'>Email:</td>
-                        <td class='bottomborder'>Testing</td>
-                        <td width='125' valign='bottom' class='label2'></td>
-                        <td></td>
-                      </tr>
-                    </tbody></table>
-                  </td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-          <tr>
-            <td valign="middle">
-              <table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                <tr>
-                  <td align='center' valign='top'>
-                    <table border='0' width='100%'  cellpadding='2' cellspacing='0'><tbody>
-                      <tr>
-                        <td>
-                          <table border='2' bordercolor='#000' width='100%' cellpadding='2' cellspacing='15'><tbody>
-                            <tr>
-                              <td style={{border:'none'}}>
-                                <table border='0'  width='100%' cellpadding='0' cellspacing='0'><tbody>
-                                  <tr>
-                                    <td width='125' valign='bottom' class='label2'>Pond Name:</td>
-                                    <td class='bottomborder'>Testing</td>
-                                    <td width='60' valign='bottom' align='center' class='label2'>Acres:</td>
-                                    <td class='bottomborder'>Testing</td>
-                                  </tr>
-                                </tbody></table>
-                              </td>
-                            </tr>
-                          </tbody></table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <table border='2' bordercolor='#000' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                            <tr>
-                              <td style={{border:'none'}}>
-                                <table border='0'  width='100%'  cellpadding='0' cellspacing='15'><tbody>
-                                  <tr>
-                                    <td width='185' valign='bottom' class='label2'>Recommended BG Harvest:</td>
-                                    <td><table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                                      <tr><td><input type='checkbox'/><label class='checklabel'>Suspend</label></td><td><input type='checkbox'/><label class='checklabel'>Consumptive</label></td><td><input type='checkbox'/><label class='checklabel'>Unlimited</label></td></tr>
-                                    </tbody></table></td>
-                                  </tr>
-                                  <tr>
-                                    <td width='185' valign='bottom' class='label2'>Recommended LMB Harvest:</td>
-                                    <td>
-                                      <table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                                        <tr>
-                                          <td><input type='checkbox'/><label class='checklabel'>Yes</label></td>
-                                          <td><input type='checkbox'/><label class='checklabel'>No</label></td>
-                                          <td align='right'><label class='checklabel'>Inch Group:</label></td>
-                                          <td class='bottomborder'>Testing</td>
-                                          <td align='right'><label class='checklabel'>Lbs/Acre:</label></td>
-                                          <td class='bottomborder'>Testing</td>
-                                        </tr>
-                                      </tbody></table>
-                                    </td>
-                                  </tr>
-                                </tbody></table>
-                              </td>
-                            </tr>
-                          </tbody></table>
-                        </td>
-                      </tr>
-                    </tbody></table>
-                  </td>
-                  <td align='right' valign='top'>
-                    <table border='2' bordercolor='#000' width='100%' cellpadding='2' cellspacing='15'><tbody>
-                      <tr>
-                        <td style={{border:'none'}}>
-                          <table border='0'  width='100%' cellpadding='9' cellspacing='0'><tbody>
-                            <tr>
-                              <td colspan='2' align='center'><b>GPS Coordinates</b></td>
-                            </tr>
-                            <tr>
-                              <td width='20' valign='bottom' class='label2'>N:</td>
-                              <td class='bottomborder'>Testing</td>
-                            </tr>
-                            <tr>
-                              <td width='20' valign='bottom' class='label2'>W:</td>
-                              <td class='bottomborder'>Testing</td>
-                            </tr>
-                          </tbody></table>
-                        </td>
-                      </tr>
-                    </tbody></table>
-                  </td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-          <tr height='20'><td></td></tr>
-          <tr>
-            <td class='small' align='center'><span style={{color:'#ff0000'}}>*</span>Level:Management Priority Level (1, 2, or 3) / <span style={{color:'#ff0000'}}>**</span>Status:Confirmed (C); Not Confirmed (NC); Done (DONE); Owner Responsibility (OR); Declined (D)</td>
-          </tr>
-          <tr>
-            <td>
-              <table border='2' bordercolor='#000' width='100%' cellpadding='10' cellspacing='0'><tbody>
-                <tr>
-                  <th>Order</th>
-                  <th>Date</th>
-                  <th>Recommended Activity</th>
-                  <th>Qty</th>
-                  <th>Unit</th>
-                  <th>Price</th>
-                  <th>Level *</th>
-                  <th>Status **</th>
-                </tr>
-                <tr>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                  <td>Testing</td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table border='2' bordercolor='#000' width='100%' cellpadding='10' cellspacing='0'><tbody>
-                <tr>
-                  <td colspan='2' align='center' class='title' bgcolor='#bfbfbf'>Send Management Plan To Information</td>
-                </tr>
-                <tr>
-                  <td class='secondtitle'>Send To:</td>
-                  <td class='secondtitle'>Send To:</td>
-                </tr>
-                <tr height='100'>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td><table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                    <tr><td><input type='checkbox'/><label class='checklabel'>Bound</label></td><td><input type='checkbox'/><label class='checklabel'>Unbound</label></td><td><input type='checkbox'/><label class='checklabel'>Email PDF?</label></td><td><input type='checkbox'/><label class='checklabel'>Cover Letter?</label></td></tr>
-                  </tbody></table></td>
-                  <td><table border='0' width='100%' cellpadding='0' cellspacing='0'><tbody>
-                    <tr><td><input type='checkbox'/><label class='checklabel'>Bound</label></td><td><input type='checkbox'/><label class='checklabel'>Unbound</label></td><td><input type='checkbox'/><label class='checklabel'>Email PDF?</label></td><td><input type='checkbox'/><label class='checklabel'>Cover Letter?</label></td></tr>
-                  </tbody></table></td>
-                </tr>
-                <tr>
-                  <td colspan='2' class='secondtitle'>Consulter With: <label class='label'>Testing</label></td>
-                </tr>
-              </tbody></table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    </>);
+   </>);
   }
 }
