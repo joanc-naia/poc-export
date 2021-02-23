@@ -40,7 +40,7 @@ export default function Electroeval() {
   	// Letter size: 8.5in 11in;
 		// Legal size: 8.5in 14in;
 		style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;\
-      margin: 1in 0.5in 1in 0.5in}\
+      margin: 0.25in 0.25in 0.25in 0.25in}\
 		div.Section1 {page: WordSection;}`;
 		//TODO: fix page-breaks, etc -- need to convert inline styles to .css
 
@@ -384,7 +384,7 @@ export default function Electroeval() {
 	</tr>
 </table>
 
-
+<pre><br clear="all" className="page-break"/></pre>
 <table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px", pageBreakAfter: "always"}} className="page2">
 	<tr>
 		<td valign='middle'>
@@ -663,7 +663,7 @@ export default function Electroeval() {
 	</tr>
 </table>
 
-
+<pre><br clear="all" className="page-break"/></pre>
 <table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page3">
 	<tr>
 		<td valign='middle'>
@@ -1060,6 +1060,7 @@ export default function Electroeval() {
 	</tr>
 </table>
 
+<pre><br clear="all" className="page-break"/></pre>
 <table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page4">
 	<tr>
 		<td valign='middle'>
@@ -1381,6 +1382,7 @@ export default function Electroeval() {
 	</tr>
 </table>
 
+<pre><br clear="all" className="page-break"/></pre>
 <table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page5">
 	<tr>
 		<td valign='middle'>
@@ -1988,6 +1990,7 @@ export default function Electroeval() {
 	</tr>
 </table>
 
+<pre><br clear="all" className="page-break"/></pre>
 <table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page6">
 	<tr>
 		<td valign='middle'>
