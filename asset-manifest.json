@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/poc-export/static/css/main.681dead4.chunk.css",
-    "main.js": "/poc-export/static/js/main.3c83ddbb.chunk.js",
-    "main.js.map": "/poc-export/static/js/main.3c83ddbb.chunk.js.map",
+    "main.css": "/poc-export/static/css/main.7015d108.chunk.css",
+    "main.js": "/poc-export/static/js/main.1214bdfa.chunk.js",
+    "main.js.map": "/poc-export/static/js/main.1214bdfa.chunk.js.map",
     "runtime-main.js": "/poc-export/static/js/runtime-main.ad971acc.js",
     "runtime-main.js.map": "/poc-export/static/js/runtime-main.ad971acc.js.map",
     "static/js/2.4e32fc37.chunk.js": "/poc-export/static/js/2.4e32fc37.chunk.js",
@@ -14,7 +14,7 @@
     "static/js/5.766f3158.chunk.js": "/poc-export/static/js/5.766f3158.chunk.js",
     "static/js/5.766f3158.chunk.js.map": "/poc-export/static/js/5.766f3158.chunk.js.map",
     "index.html": "/poc-export/index.html",
-    "static/css/main.681dead4.chunk.css.map": "/poc-export/static/css/main.681dead4.chunk.css.map",
+    "static/css/main.7015d108.chunk.css.map": "/poc-export/static/css/main.7015d108.chunk.css.map",
     "static/js/2.4e32fc37.chunk.js.LICENSE.txt": "/poc-export/static/js/2.4e32fc37.chunk.js.LICENSE.txt",
     "static/js/3.70d2dd0a.chunk.js.LICENSE.txt": "/poc-export/static/js/3.70d2dd0a.chunk.js.LICENSE.txt",
     "static/js/4.6de7b4fc.chunk.js.LICENSE.txt": "/poc-export/static/js/4.6de7b4fc.chunk.js.LICENSE.txt",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.ad971acc.js",
     "static/js/3.70d2dd0a.chunk.js",
-    "static/css/main.681dead4.chunk.css",
-    "static/js/main.3c83ddbb.chunk.js"
+    "static/css/main.7015d108.chunk.css",
+    "static/js/main.1214bdfa.chunk.js"
   ]
 }
