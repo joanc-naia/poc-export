@@ -5,33 +5,61 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import './sample.css';
 import extractCSS from "component-css-extractor";
+import html2pdf from 'html2pdf.js';
 
 export default function Electroeval() {
   const ref1 = useRef();
 	const [open, setOpen] = useState(false);
-	const workbookInit = new ExcelJS.Workbook();
-	workbookInit.addWorksheet('Electro Eval')
-	const [workbook, setWorkbook] = useState(workbookInit);
 
 	const exportAsExcel2 = async () => {
 		const style = extractCSS(ref1.current);
-		const preHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><head><style>${style}</style></head><body><table>`;
-		const postHtml = `</table></body></html>`;
-		const table = document.querySelector('#report table');
-		const html = `${preHtml}${table.innerHTML}${postHtml}`;
+		const preHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">\
+		<head>\
+			<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>\
+				<x:Name>Page1</x:Name>\
+			</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>\
+			<style>${style}</style>\
+		</head><body>`;
+		const postHtml = `</body></html>`;
+		const table = document.querySelector('.report-container');
+		const html = `${preHtml}${table.outerHTML}${postHtml}`;
 
-		// const url = 'data:application/vnd.ms-excel;base64,' + window.btoa(unescape(encodeURIComponent(html)));
-		// let link = document.createElement('A');
-		// link.href = url;
-		// link.download = 'Document';
-		// document.body.appendChild(link);
-		// link.click();
-		// document.body.removeChild(link);
+		const url = 'data:application/vnd.ms-excel;base64,' + window.btoa(unescape(encodeURIComponent(html)));
+		let link = document.createElement('A');
+		link.href = url;
+		link.download = 'Document';
+		link.click();
 
-		var blob = new Blob([table.innerHTML], {type: "application/vnd.ms-excel" });
-		saveAs(blob, "Report.xls");
+		// var blob = new Blob([table.innerHTML], {type: "application/vnd.ms-excel" });
+		// saveAs(blob, "Report.xls");
 
 		handleButtonClick();
+	}
+
+	const exportAsExcel = async () => {
+		//box: Wingdings o
+		//box check: Wingdings þ
+		//box shaded: Wingdings n
+
+		const settings = {views: [{showGridLines: false}]};
+		const defaultFont = {name: 'Arial'}
+		let workbook = new ExcelJS.Workbook();
+    let sheet1 = workbook.addWorksheet("Page1", settings);
+		sheet1.getCell('AO2').value = 'Electrofishing Evaluation Datasheet';
+		sheet1.getCell('AO2').font = { ...defaultFont, size: 14, bold: true, underline: true }
+		sheet1.getCell('DR3').value = 'PAGE 1';
+		sheet1.getCell('DR3').font = { ...defaultFont, size: 9 }
+
+
+		let sheet2 = workbook.addWorksheet("Page2", settings);
+		let sheet3 = workbook.addWorksheet("Page3", settings);
+		let sheet4 = workbook.addWorksheet("Page4", settings);
+		let sheet5 = workbook.addWorksheet("Page5", settings);
+		let sheet6 = workbook.addWorksheet("Page6", settings);
+
+		const buf = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buf]), 'Report.xlsx');
+    handleButtonClick();
 	}
 
 	const exportAsWord2 = async () => {
@@ -41,7 +69,8 @@ export default function Electroeval() {
 		// Legal size: 8.5in 14in;
 		style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;\
       margin: 0.25in 0.25in 0.25in 0.25in}\
-		div.Section1 {page: WordSection;}`;
+		div.Section1 {page: WordSection;}\
+		font-family: Arial, Helvetica, sans-serif;`;
 		//TODO: fix page-breaks, etc -- need to convert inline styles to .css
 
 		const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\
@@ -59,7 +88,7 @@ export default function Electroeval() {
 			</head><body style="tab-interval:.5in"><div class="Section1">`;
 		const postHtml = "</div></body></html>";
 
-		const html = `${preHtml}${document.getElementById('report').outerHTML}${postHtml}`;
+		const html = `${preHtml}${document.getElementById('report').innerHTML}${postHtml}`;
 
 		const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
 		let link = document.createElement('A');
@@ -69,7 +98,7 @@ export default function Electroeval() {
 		link.click();
 		document.body.removeChild(link);
 		handleButtonClick();
-		console.log('html', html)
+		console.log(html)
 	}
 
 	const exportAsPdf = () => {
@@ -116,18 +145,23 @@ export default function Electroeval() {
 	}
 
 	const exportAsPdf2 = () => {
-		let doc = new jsPDF({
-			orientation: 'p',
-			unit: 'px',
-			format: 'letter',
-			hotfixes: ["px_scaling"]
-		});
-		// TODO: fix export to pdf without images
-		const pageHTML = document.querySelector(`.report-container`).outerHTML;
-		doc.html(pageHTML, {
-			callback: doc=>{
-				doc.save('Report.pdf');
-			}
+		const pageHTML = `<div style="width:800px">\
+			<table>${document.querySelector('.page1').innerHTML}</table>\
+			<div class="page-break"></div>\
+			<table>${document.querySelector('.page2').innerHTML}</table>\
+			<div class="page-break"></div>\
+			<table>${document.querySelector('.page3').innerHTML}</table>\
+			<div class="page-break"></div>\
+			<table>${document.querySelector('.page4').innerHTML}</table>\
+			<div class="page-break"></div>\
+			<table>${document.querySelector('.page5').innerHTML}</table>\
+			<div class="page-break"></div>\
+			<table>${document.querySelector('.page6').innerHTML}</table>\
+		</div>`;
+		html2pdf(pageHTML, {
+			filename: 'Report.pdf',
+			jsPDF: { unit: 'px', format: 'letter', hotfixes: ["px_scaling"] },
+			margin: [20,5]
 		})
 		handleButtonClick();
 	}
@@ -385,7 +419,7 @@ export default function Electroeval() {
 </table>
 
 <pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px", pageBreakAfter: "always"}} className="page2">
+<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page2">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
@@ -664,7 +698,7 @@ export default function Electroeval() {
 </table>
 
 <pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page3">
+<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page3">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
@@ -1061,7 +1095,7 @@ export default function Electroeval() {
 </table>
 
 <pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page4">
+<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page4">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
@@ -1383,7 +1417,7 @@ export default function Electroeval() {
 </table>
 
 <pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page5">
+<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page5">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
@@ -1991,7 +2025,7 @@ export default function Electroeval() {
 </table>
 
 <pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px",  pageBreakBefore: "always"}} className="page6">
+<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page6">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>

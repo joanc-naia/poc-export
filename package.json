@@ -9,17 +9,18 @@
     "ag-charts-community": "^3.0.0",
     "ag-charts-react": "^3.0.0",
     "component-css-extractor": "^1.0.0",
+    "dompurify": "^2.2.6",
     "exceljs": "^4.2.0",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.0.0-rc.7",
+    "html2pdf.js": "^0.9.2",
     "jspdf": "^2.3.0",
     "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
-    "web-vitals": "^1.1.0",
-    "xlsx": "^0.16.9"
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
