@@ -105,8 +105,8 @@ export default function Electroeval() {
 					}
 
 					if (index>0) doc.addPage();
-					// doc.addImage(imgData, 'PNG', 7, 10, imgWidth, imgHeight);
 					doc.addImage(imgData, 'PNG', 6, 6, imgWidth, imgHeight)
+					//TODO: fix image clipping
 				} else {
 					console.log("error", result.reason);
 				}
@@ -114,7 +114,22 @@ export default function Electroeval() {
 			doc.save('Report.pdf');
 		});
 
-		// TODO: export to pdf without images
+	}
+
+	const exportAsPdf2 = () => {
+		let doc = new jsPDF({
+			orientation: 'p',
+			unit: 'px',
+			format: 'letter',
+			hotfixes: ["px_scaling"]
+		});
+		// TODO: fix export to pdf without images
+		const pageHTML = document.querySelector(`#report`).outerHTML;
+		doc.html(pageHTML, {
+			callback: doc=>{
+				doc.save('Report.pdf');
+			}
+		})
 		handleButtonClick();
 	}
 
@@ -137,7 +152,8 @@ export default function Electroeval() {
 				<div className="dropdown">
 					<button onClick={exportAsExcel2}>Export Report Excel</button>
 					<button onClick={exportAsWord2}>Export Report Word</button>
-					<button onClick={exportAsPdf}>Export Report PDF</button>
+					<button onClick={exportAsPdf}>Export Report PDF image</button>
+					<button onClick={exportAsPdf2}>Export Report PDF text</button>
 				</div>
 				)}
 			</div>
