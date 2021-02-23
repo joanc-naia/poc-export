@@ -7,21 +7,17 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  HashRouter
 } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
+    <HashRouter basename='/'>
       <Switch>
-        <Route path="/chart">
-          <ChartExample />
-        </Route>
-        <Route path="/">
-          <Electroeval />
-        </Route>
+        <Route path="/chart"><ChartExample /></Route>
+        <Route path="/"><Electroeval /></Route>
       </Switch>
-    </Router>
+    </HashRouter>
   );
 }
 

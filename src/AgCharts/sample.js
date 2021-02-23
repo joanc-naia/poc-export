@@ -65,23 +65,42 @@ export default function ChartExample() {
     legend: { enabled: false },
   });
   const [open, setOpen] = useState(false);
-  const workbookInit = new ExcelJS.Workbook();
-  workbookInit.addWorksheet('Sample Chart')
-  const [workbook, setWorkbook] = useState(workbookInit);
 
   const exportAsExcel = async () => {
-    //TODO: also export table
+    let workbook = new ExcelJS.Workbook();
+    let sheet = workbook.addWorksheet("Sample Chart");
+
+    sheet.addRow([options.title.text]);
+    sheet.mergeCells(1,1,1,4);
+    sheet.addRow(['','Year', 'Visitors']);
+    sheet.getRow(1).font = {bold: true};
+    sheet.getRow(2).font = {bold: true};
+
+    data.forEach((val)=>{
+      sheet.addRow(['',val.year, val.visitors]);
+    });
+
     const canvas=document.querySelector('.chart canvas');
     const chartImg = workbook.addImage({
       base64: canvas.toDataURL(),
       extension: 'png',
     });
-    workbook.worksheets[0].addImage(chartImg, 'B4:P15');
-    const buf = workbook.xlsx.writeBuffer();
-    saveAs(new Blob([buf]), 'abc.xlsx');
+    // workbook.worksheets[0].addImage(chartImg, 'B4:P15');
+    sheet.addImage(chartImg, {
+      tl: {col: 2, row: data.length + 3},
+      ext: {width: 720, height: 300}
+    });
+
+    const buf = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buf]), 'chart.xlsx');
     handleButtonClick();
   }
 
+  /** possible Word properties
+   * mso-header-margin:42.55pt;
+   * mso-footer-margin:49.6pt;
+   * mso-paper-source:0;
+   */
   const exportAsWord = async() => {
     let style = extractCSS(ref1.current);
     // A4 size: 841.95pt 595.35pt;
