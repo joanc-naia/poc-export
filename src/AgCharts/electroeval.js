@@ -29,7 +29,7 @@ export default function Electroeval() {
 		// document.body.removeChild(link);
 
 		var blob = new Blob([table.innerHTML], {type: "application/vnd.ms-excel" });
-		saveAs(blob, "Statement.xls");
+		saveAs(blob, "Report.xls");
 
 		handleButtonClick();
 	}
@@ -64,7 +64,7 @@ export default function Electroeval() {
 		const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
 		let link = document.createElement('A');
 		link.href = url;
-		link.download = 'Document.doc';
+		link.download = 'Report.doc';
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
@@ -82,14 +82,14 @@ export default function Electroeval() {
 		const aspectRatio = 11/8.5;
 
 		// generate all pages
-		window.scrollTo(0,0)
+		window.scrollTo(0,0);
 		Promise.allSettled([
-			html2canvas(document.querySelector('.page1')),
-			html2canvas(document.querySelector('.page2')),
-			html2canvas(document.querySelector('.page3')),
-			html2canvas(document.querySelector('.page4')),
-			html2canvas(document.querySelector('.page5')),
-			html2canvas(document.querySelector('.page6'))
+			html2canvas(document.querySelector('.page1'), {width: 990}),
+			html2canvas(document.querySelector('.page2'), {width: 990}),
+			html2canvas(document.querySelector('.page3'), {width: 990}),
+			html2canvas(document.querySelector('.page4'), {width: 990}),
+			html2canvas(document.querySelector('.page5'), {width: 990}),
+			html2canvas(document.querySelector('.page6'), {width: 990})
 		]).then(results => {
 			results.forEach((result, index)=>{
 				if (result.status === "fulfilled") {
@@ -105,8 +105,7 @@ export default function Electroeval() {
 					}
 
 					if (index>0) doc.addPage();
-					doc.addImage(imgData, 'PNG', 6, 6, imgWidth, imgHeight)
-					//TODO: fix image clipping
+					doc.addImage(imgData, 'PNG', 10, 8, imgWidth, imgHeight)
 				} else {
 					console.log("error", result.reason);
 				}
@@ -124,7 +123,7 @@ export default function Electroeval() {
 			hotfixes: ["px_scaling"]
 		});
 		// TODO: fix export to pdf without images
-		const pageHTML = document.querySelector(`#report`).outerHTML;
+		const pageHTML = document.querySelector(`.report-container`).outerHTML;
 		doc.html(pageHTML, {
 			callback: doc=>{
 				doc.save('Report.pdf');
