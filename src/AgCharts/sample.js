@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import './sample.css';
 import extractCSS from "component-css-extractor";
 
@@ -92,7 +94,7 @@ export default function ChartExample() {
     });
 
     const buf = await workbook.xlsx.writeBuffer();
-    saveAs(new Blob([buf]), 'chart.xlsx');
+    saveAs(new Blob([buf]), 'Chart.xlsx');
     handleButtonClick();
   }
 
@@ -109,29 +111,58 @@ export default function ChartExample() {
     style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;}\
     div.Section1 {page: WordSection;}\
     table{font-size:13px;font-family:Arial;margin: 0 auto;text-align:center}`;
-    console.log("style", style);
 
     const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\
       <head>\
         <meta charset='utf-8'>\
         <title>Export HTML To Doc</title>\
         <style>${style}</style>\
-      </head><body style="tab-interval:.5in"><div class="Section1">`;
+      </head><body style="tab-interval:.5in"><div class="Section1 chart">`;
     const postHtml = "</div></body></html>";
-    const table = document.querySelector('.chart table').innerHTML;
+    const table = document.querySelector('.chart table').outerHTML;
     const canvas = document.querySelector('.chart canvas');
-    const content = `<table>${table}</table><br/><img src="${canvas.toDataURL()}" />`
+    const content = `${table}<br/><img width=600 src="${canvas.toDataURL()}" />`
     const html = `${preHtml}${content}${postHtml}`;
 
     const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
     let link = document.createElement('A');
     link.href = url;
-    link.download = 'Document.doc';
+    link.download = 'Chart.doc';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     handleButtonClick();
   }
+
+  const exportAsPdf = () => {
+    let doc = new jsPDF('p', 'mm', 'letter');
+
+    let style = extractCSS(ref1.current);
+    const preHtml = `<html><head>\
+        <meta charset='utf-8'>\
+        <title>Export HTML To PDF</title>\
+        <style>${style}</style>\
+      </head><body><div class="chart">`;
+    const postHtml = "</div></body></html>";
+    const table = document.querySelector('.chart table').outerHTML;
+    const canvas = document.querySelector('.chart canvas');
+    const content = `${table}<br/><img width=500 src="${canvas.toDataURL()}" />`
+    const html = `${preHtml}${content}${postHtml}`;
+
+    html2canvas(document.querySelector('.chart table')).then(tableCanv => {
+      const imgData = tableCanv.toDataURL('image/png');
+      const imgWidth = 80;
+      const imgHeight = (tableCanv.height * imgWidth) / tableCanv.width;
+      doc.addImage(imgData, 'PNG', 70, 10, imgWidth, imgHeight);
+      const chartData = canvas.toDataURL('image/png');
+      const chartWidth = 180;
+      const chartHeight = (canvas.height * chartWidth) / canvas.width
+      doc.addImage(chartData, 'PNG', 20, imgHeight + 30, chartWidth, chartHeight)
+      doc.save('download.pdf');
+    })
+    handleButtonClick();
+  }
+
   const handleButtonClick = () => {
     setOpen(!open);
   };
@@ -151,13 +182,14 @@ export default function ChartExample() {
         <div className="dropdown">
           <button onClick={exportAsExcel}>Export Chart Excel</button>
           <button onClick={exportAsWord}>Export Chart Word</button>
+          <button onClick={exportAsPdf}>Export Chart PDF</button>
         </div>
         )}
       </div>
     </header>
 
   <div className="chart" ref={ref1}>
-    <table>
+    <table class="chart-table">
       <thead>
         <tr><th colSpan="2">{options.title.text}</th></tr>
         <tr><th>Year</th><th>Visitors</th></tr>
