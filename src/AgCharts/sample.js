@@ -137,18 +137,7 @@ export default function ChartExample() {
   const exportAsPdf = () => {
     let doc = new jsPDF('p', 'mm', 'letter');
 
-    let style = extractCSS(ref1.current);
-    const preHtml = `<html><head>\
-        <meta charset='utf-8'>\
-        <title>Export HTML To PDF</title>\
-        <style>${style}</style>\
-      </head><body><div class="chart">`;
-    const postHtml = "</div></body></html>";
-    const table = document.querySelector('.chart table').outerHTML;
     const canvas = document.querySelector('.chart canvas');
-    const content = `${table}<br/><img width=500 src="${canvas.toDataURL()}" />`
-    const html = `${preHtml}${content}${postHtml}`;
-
     html2canvas(document.querySelector('.chart table')).then(tableCanv => {
       const imgData = tableCanv.toDataURL('image/png');
       const imgWidth = 80;
