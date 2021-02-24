@@ -99,10 +99,10 @@ export default function Electroeval() {
 		link.click();
 		document.body.removeChild(link);
 		handleButtonClick();
-		console.log(html)
+		// console.log(html)
 	}
 
-	const exportAsPdf = () => {
+	const exportAsPdfImages2 = () => {
     let doc = new jsPDF({
 			orientation: 'p',
 			unit: 'px',
@@ -145,7 +145,7 @@ export default function Electroeval() {
 
 	}
 
-	const exportAsPdf2 = () => {
+	const exportAsPdfImages = () => {
 		const pageHTML = `<div style="width:800px">\
 			<table>${document.querySelector('.page1').innerHTML}</table>\
 			<div class="page-break"></div>\
@@ -164,6 +164,24 @@ export default function Electroeval() {
 			jsPDF: { unit: 'px', format: 'letter', hotfixes: ["px_scaling"] },
 			margin: [20,5]
 		})
+		handleButtonClick();
+	}
+
+	const exportAsPdfText = () => {
+		let doc = new jsPDF({
+			orientation: 'p',
+			unit: 'px',
+			format: 'letter',
+			hotfixes: ["px_scaling"]
+		});
+
+		// TODO: fix page breaks etc
+		const pageHTML = document.querySelector(`.report-container`).outerHTML;
+		doc.html(pageHTML, {
+			callback: doc=>{
+				doc.save('ReportText.pdf');
+			}
+		});
 		handleButtonClick();
 	}
 
@@ -186,9 +204,9 @@ export default function Electroeval() {
 				<div className="dropdown">
 
 					<button onClick={exportAsWord2}>Export to Word</button>
-					{/* <button onClick={exportAsPdf}>Export Report PDF image</button> */}
-					<button onClick={exportAsPdf2}>Export to PDF text</button>
-					<button onClick={exportAsExcel2}>Export Report Excel</button>
+					<button onClick={exportAsPdfText}>Export to PDF text without page breaks</button>
+					<button onClick={exportAsPdfImages}>Export Report PDF image with page breaks</button>
+					<button onClick={exportAsExcel2}>Export Report Excel (in progress)</button>
 				</div>
 				)}
 			</div>
