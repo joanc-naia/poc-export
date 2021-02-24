@@ -14,25 +14,26 @@ export default function Electroeval() {
 	const exportAsExcel2 = async () => {
 		const style = extractCSS(ref1.current);
 		const preHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">\
-		<head>\
-			<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>\
-				<x:Name>Page1</x:Name>\
-			</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>\
-			<style>${style}</style>\
-		</head><body>`;
-		const postHtml = `</body></html>`;
-		const table = document.querySelector('.report-container');
-		const html = `${preHtml}${table.outerHTML}${postHtml}`;
+		<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>\
+			<x:Name>Page1</x:Name>\
+			<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>\
+		</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>\
+		<head><style>${style}</style></head>\
+		<body><table>`;
+		const postHtml = `</table></body></html>`;
+		const table = document.querySelector('#report table');
+		const html = `${preHtml}${table.innerHTML}${postHtml}`;
 
-		const url = 'data:application/vnd.ms-excel;base64,' + window.btoa(unescape(encodeURIComponent(html)));
-		let link = document.createElement('A');
-		link.href = url;
-		link.download = 'Document';
-		link.click();
+		// const url = 'data:application/vnd.ms-excel;base64,' + window.btoa(unescape(encodeURIComponent(html)));
+		// let link = document.createElement('A');
+		// link.href = url;
+		// link.download = 'Document';
+		// document.body.appendChild(link);
+		// link.click();
+		// document.body.removeChild(link);
 
-		// var blob = new Blob([table.innerHTML], {type: "application/vnd.ms-excel" });
-		// saveAs(blob, "Report.xls");
-
+		var blob = new Blob([table.innerHTML], {type: "application/vnd.ms-excel" });
+		saveAs(blob, "Report.xls");
 		handleButtonClick();
 	}
 
@@ -68,9 +69,9 @@ export default function Electroeval() {
   	// Letter size: 8.5in 11in;
 		// Legal size: 8.5in 14in;
 		style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;\
-      margin: 0.25in 0.25in 0.25in 0.25in}\
-		div.Section1 {page: WordSection;}\
-		font-family: Arial, Helvetica, sans-serif;`;
+			margin: 1in 0.5in 1in 0.5in}\
+			div.Section1 {page: WordSection;}\
+			font-family: Arial, Helvetica, sans-serif;`
 		//TODO: fix page-breaks, etc -- need to convert inline styles to .css
 
 		const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\
@@ -183,24 +184,24 @@ export default function Electroeval() {
 				</button>
 				{open && (
 				<div className="dropdown">
+
+					<button onClick={exportAsWord2}>Export to Word</button>
+					{/* <button onClick={exportAsPdf}>Export Report PDF image</button> */}
+					<button onClick={exportAsPdf2}>Export to PDF text</button>
 					<button onClick={exportAsExcel2}>Export Report Excel</button>
-					<button onClick={exportAsWord2}>Export Report Word</button>
-					<button onClick={exportAsPdf}>Export Report PDF image</button>
-					<button onClick={exportAsPdf2}>Export Report PDF text</button>
 				</div>
 				)}
 			</div>
 		</header>
 		<div className='report-container'>
 			<div id="report" ref={ref1}>
-
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' className="page1">
+    		<table border='0' width='100%' cellPadding='5' cellSpacing='0' className="page1">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
 				<tr>
-					<td align='center' valign='middle'><b style={{fontSize:"20px", fontWeight:"bold"}}>Electrofishing Evaluation Datasheet</b></td>
-					<td align='right' valign='middle' className='page'>PAGE 1</td>
+					<td align='center' valign='middle'><b style={{fontSize:"20px", fontFamily:"Arial", fontWeight:"bold"}}>Electrofishing Evaluation Datasheet</b></td>
+					<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 1</td>
 				</tr>
 			</table>
 		</td>
@@ -210,22 +211,22 @@ export default function Electroeval() {
 			<table style={{border:"2px solid #000"}} width='100%' cellPadding='0' cellSpacing='0'>
 			<tr>
 				<td>
-					<table border='0' width='100%' cellPadding='2' cellSpacing='15'>
+					<table border='0' width='100%' cellPadding='3' cellSpacing='5'>
 						<tr>
-							<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial"}}>Data Recorded By:</td>
+							<td width='145' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}}>Data Recorded By:</td>
 							<td className='bottomborder'>Testing</td>
-							<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial"}}>Data Entered By:</td>
+							<td width='145' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}}>Data Entered By:</td>
 							<td className='bottomborder'>Testing</td>
-							<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial"}} align='right'>Plan Finisher:</td>
+							<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right'>Plan Finisher:</td>
 							<td className='bottomborder'>Testing</td>
-							<td width='125' valign='bottom' align='right' style={{fontSize:"12px", fontFamily:"Arial"}}>Follow Up By:</td>
+							<td width='135' valign='bottom' align='right' style={{fontSize:"11px", fontFamily:"Arial"}}>Follow Up By:</td>
 							<td className='bottomborder'>Testing</td>
 						</tr>
 						<tr>
-							<td width='125' style={{fontSize:"12px", fontFamily:"Arial"}}>Management Type:</td>
+							<td width='155' style={{fontSize:"11px", fontFamily:"Arial"}}>Management Type:</td>
 							<td colSpan='3' className='bottomborder'>Testing</td>
-							<td width='145' align='right' style={{fontSize:"12px", fontFamily:"Arial"}} >Correspondence Type:</td>
-							<td colSpan='3' className='bottomborder'>Testing</td>
+							<td colSpan='2' align='right' style={{fontSize:"11px", fontFamily:"Arial"}} >Correspondence Type:</td>
+							<td colSpan='2' className='bottomborder'>Testing</td>
 						</tr>
 					</table>
 				</td>
@@ -239,47 +240,47 @@ export default function Electroeval() {
 			<table style={{border:"2px solid #000"}} width='100%' cellPadding='0' cellSpacing='0'>
 				<tr>
 					<td>
-						<table border='0' width='100%' cellPadding='2' cellSpacing='15'>
+						<table border='0' width='100%' cellPadding='2' cellSpacing='5'>
 							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Customer:</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Customer:</td>
 								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Date:</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Date:</td>
 								<td className='bottomborder'>Testing</td>
 							</tr>
 							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Contact:</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Contact:</td>
 								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Property Name:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td width='145' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Contact Type:</td>
-								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>State/County:</td>
+								<td width='135' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Property Name:</td>
 								<td className='bottomborder'>Testing</td>
 							</tr>
 							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Work Phone:</td>
-								<td><table width='100%' cellPadding='0' cellSpacing='0'><tr><td className='bottomborder'>Testing</td><td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='40' align='center'>Ext:</td><td className='bottomborder'>Testing</td></tr></table></td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Uses:</td>
+								<td width='165' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Contact Type:</td>
+								<td className='bottomborder'>Testing</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>State/County:</td>
 								<td className='bottomborder'>Testing</td>
 							</tr>
 							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Home Phone:</td>
-								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Fishing Goals:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Cell Phone:</td>
-								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Property Type:</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Work Phone:</td>
+								<td width='35%'><table width='100%' cellPadding='0' cellSpacing='0'><tr><td className='bottomborder'>Testing</td><td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='40' align='center'>Ext:</td><td className='bottomborder'>Testing</td></tr></table></td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Primary Uses:</td>
 								<td className='bottomborder'>Testing</td>
 							</tr>
 							<tr>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Email:</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Home Phone:</td>
 								<td className='bottomborder'>Testing</td>
-								<td width='125' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}></td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Fishing Goals:</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Cell Phone:</td>
+								<td className='bottomborder'>Testing</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Property Type:</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Email:</td>
+								<td className='bottomborder'>Testing</td>
+								<td width='125' valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}></td>
 								<td></td>
 							</tr>
 						</table>
@@ -297,7 +298,7 @@ export default function Electroeval() {
 						<table border='0' width='100%'  cellPadding='2' cellSpacing='0'>
 							<tr>
 								<td>
-									<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='5'>
 										<tr>
 											<td style={{border:"none"}}>
 												<table border='0'  width='100%' cellPadding='0' cellSpacing='0'>
@@ -319,15 +320,74 @@ export default function Electroeval() {
 									<table style={{border:"2px solid #000"}} width='100%' cellPadding='0' cellSpacing='0'>
 										<tr>
 											<td style={{border:"none"}}>
-												<table border='0'  width='100%'  cellPadding='0' cellSpacing='15'>
+												<table border='0'  width='100%'  cellPadding='0' cellSpacing='5'>
 													<tr>
-														<td width='185' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recommended BG Harvest:</td>
-														<td><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr><td><input type='checkbox'/><label className='checklabel'>Suspend</label></td><td><input type='checkbox'/><label className='checklabel'>Consumptive</label></td><td><input type='checkbox'/><label className='checklabel'>Unlimited</label></td></tr></table></td>
-													</tr>
+														<td>
+															<table border='0'  width='100%'  cellPadding='0' cellSpacing='0'>
+																<tr>
+																	<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Recommended BG Harvest:</td>
+																	<td><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr>
+																		<td>
+																			<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+																				<tr>
+																					<td width='21'><input type='checkbox'/></td>
+																					<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Suspend</span></td>
+
+																				</tr>
+																			</table>
+																			</td>
+																			<td>
+																				<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+																					<tr>
+																						<td width='21'><input type='checkbox'/></td>
+																						<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Consumptive</span></td>
+
+																					</tr>
+																				</table>
+																				</td>
+																				<td>
+																					<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+																						<tr>
+																							<td width='21'><input type='checkbox'/></td>
+																							<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Unlimited</span></td>
+
+																						</tr>
+																					</table>
+
+																					</td></tr></table></td>
+
+																</tr>
+															</table>
+														</td>
+														</tr>
 													<tr>
-														<td width='185' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recommended LMB Harvest:</td>
-														<td><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr><td><input type='checkbox'/><label className='checklabel'>Yes</label></td><td><input type='checkbox'/><label className='checklabel'>No</label></td><td align='right'><label className='checklabel'>Inch Group:</label></td><td className='bottomborder'>Testing</td><td align='right'><label className='checklabel'>Lbs/Acre:</label></td><td className='bottomborder'>Testing</td></tr></table></td>
-													</tr>
+														<td>
+															<table border='0'  width='100%'  cellPadding='0' cellSpacing='0'>
+																<tr>
+																	<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial", fontWeight:"bold"}}>Recommended LMB Harvest:</td>
+																	<td><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr><td>
+																		<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+																						<tr>
+																							<td width='21'><input type='checkbox'/></td>
+																							<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Yes</span></td>
+
+																						</tr>
+																					</table>
+																		</td>
+																		<td>
+																			<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+																						<tr>
+																							<td width='21'><input type='checkbox'/></td>
+																							<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>No</span></td>
+
+																						</tr>
+																					</table>
+																			</td><td align='right'><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Inch Group:</span></td><td className='bottomborder'>Testing</td><td align='right'><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Lbs/Acre:</span></td><td className='bottomborder'>Testing</td></tr></table></td>
+
+																</tr>
+															</table>
+														</td>
+														</tr>
 												</table>
 											</td>
 										</tr>
@@ -338,12 +398,12 @@ export default function Electroeval() {
 						</table>
 					</td>
 					<td align='right' valign='top'>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='5'>
 							<tr>
 								<td style={{border:"none"}}>
-									<table border='0'  width='100%' cellPadding='9' cellSpacing='0'>
+									<table border='0'  width='100%' cellPadding='5' cellSpacing='0'>
 										<tr>
-											<td colSpan='2' align='center'><b>GPS Coordinates</b></td>
+											<td colSpan='2' align='center'><b style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>GPS Coordinates</b></td>
 										</tr>
 										<tr>
 											<td width='20' valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>N:</td>
@@ -370,24 +430,24 @@ export default function Electroeval() {
 		<td>
 			<table style={{border:"2px solid #000"}} width='100%' cellPadding='8' cellSpacing='0'>
 				<tr>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Order</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Date</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Recommended Activity</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Qty</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Unit</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Price</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Level *</th>
-					<th style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Status **</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Order</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Date</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Recommended Activity</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Qty</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Unit</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Price</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Level *</th>
+					<th style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Status **</th>
 				</tr>
 				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
+					<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Testing</td>
 				</tr>
 			</table>
 		</td>
@@ -396,706 +456,1791 @@ export default function Electroeval() {
 		<td>
 			<table style={{border:"2px solid #000"}} width='100%' cellPadding='8' cellSpacing='0'>
 				<tr>
-					<td colSpan='2' align='center' style={{fontSize:"16px", fontWeight:"bold"}} bgcolor='#bfbfbf'>Send Management Plan To Information</td>
+					<td colSpan='2' align='center' style={{fontSize:"16px",fontFamily:"Arial", fontWeight:"bold"}} bgcolor='#bfbfbf'>Send Management Plan To Information</td>
 				</tr>
 				<tr>
-					<td style={{fontSize:"13px", fontWeight:"bold", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Send To:</td>
-					<td style={{fontSize:"13px", fontWeight:"bold", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Send To:</td>
+					<td style={{fontSize:"12px",fontFamily:"Arial", fontWeight:"bold", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Send To:</td>
+					<td style={{fontSize:"12px",fontFamily:"Arial", fontWeight:"bold", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Send To:</td>
 				</tr>
 				<tr height='60'>
 					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
 					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
 				</tr>
 				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr><td valign='center'><input type='checkbox'/><label className='checklabel' >Bound</label></td><td><input type='checkbox'/><label className='checklabel'>Unbound</label></td><td><input type='checkbox'/><label className='checklabel'>Email PDF?</label></td><td><input type='checkbox'/><label className='checklabel'>Cover Letter?</label></td></tr></table></td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr><td><input type='checkbox'/><label className='checklabel'>Bound</label></td><td><input type='checkbox'/><label className='checklabel'>Unbound</label></td><td><input type='checkbox'/><label className='checklabel'>Email PDF?</label></td><td><input type='checkbox'/><label className='checklabel'>Cover Letter?</label></td></tr></table></td>
+					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}><table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr>
+						<td valign='center'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Bound</span></td>
+
+									</tr>
+								</table>
+							</td>
+						<td>
+							<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Unbound</span></td>
+
+									</tr>
+								</table>
+						</td>
+						<td>
+
+							<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Email PDF?</span></td>
+
+									</tr>
+								</table>
+							</td>
+						<td>
+						<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Cover Letter?</span></td>
+
+									</tr>
+								</table>
+						</td>
+						</tr></table>
+						</td>
+					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>
+					<table border='0' width='100%' cellPadding='0' cellSpacing='0'><tr>
+						<td valign='center'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Bound</span></td>
+
+									</tr>
+								</table>
+							</td>
+						<td>
+							<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Unbound</span></td>
+
+									</tr>
+								</table>
+						</td>
+						<td>
+
+							<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Email PDF?</span></td>
+
+									</tr>
+								</table>
+							</td>
+						<td>
+						<table width='100%' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+									<tr>
+										<td width='21'><input type='checkbox'/></td>
+										<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Cover Letter?</span></td>
+
+									</tr>
+								</table>
+						</td>
+						</tr></table>
+						</td>
 				</tr>
 				<tr>
-					<td colSpan='2' style={{borderTop:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Consulter With: <label style={{fontSize:"12px", fontFamily:"Arial"}}>Testing</label></td>
+					<td colSpan='2' style={{borderTop:"1px solid #000", fontSize:"12px",fontFamily:"Arial", fontWeight:"bold"}}>Consulter With: <span style={{fontSize:"12px", fontFamily:"Arial"}}>Testing</span></td>
 				</tr>
 			</table>
 		</td>
 	</tr>
 </table>
 
-<pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page2">
-	<tr>
-		<td valign='middle'>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+			<pre className="page-break"><br clear="all" className="page-break"/></pre>
+			<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page2">
 				<tr>
-					<td align='center' valign='middle'>
+					<td valign='middle'>
 						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
 							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
-								<td className='bottomborder' width='110'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='10'></td>
-					<td align='right' valign='middle' className='page'>PAGE 2</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td style={{fontSize:"13px", fontWeight:"bold"}}><u>Pond Assessment / Water Control / Physical Characteristics</u></td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-				<tr>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Date of Impoundment:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='120' align='center'>Dam Type:</td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='140'>Emergency Spillway:</td>
-					<td><input type='checkbox'/><label className='checklabel'>Yes</label><input type='checkbox'/><label className='checklabel'>No</label></td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center' colSpan=''>Spillway Material:</td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='140'>Mechanical Spillway:</td>
-					<td><input type='checkbox'/><label className='checklabel'>Yes</label><input type='checkbox'/><label className='checklabel'>No</label></td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center'>Diameter (in):</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Material:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='140'>Trash Rack:</td>
-					<td><input type='checkbox'/><label className='checklabel'>Yes</label><input type='checkbox'/><label className='checklabel'>No</label></td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center'>Diameter (in):</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Material:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-				<tr>
-					<td>
-						<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Water Source:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Depth:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Topography:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Soil Type:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Landscape:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Soil Condition:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='80'></td>
-					<td width='400'>
-						<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-							<tr>
-								<td colSpan='2' style={{fontSize:"13px", fontWeight:"bold"}} align='center'><u>Water Characteristics</u></td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Fertility Level:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Plankton Bloom:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Suspended Solids:</td>
-								<td><input type='checkbox'/><label className='checklabel'>Yes</label><input type='checkbox'/><label className='checklabel'>No</label></td>
-							</tr>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Water Level:</td>
-								<td className='bottomborder'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='80'></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td style={{fontSize:"13px", fontWeight:"bold"}}><u>Pond Management History</u></td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-				<tr>
-					<td width='150' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Fish Harvest:</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='100'>Bass</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='350' align='right'>Annual Pounds Removed:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td width='150'></td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Bluegill</td>
-					<td className='bottomborder'>Testing</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td width='150'></td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Other (specify)</td>
-					<td className='bottomborder'>Testing</td>
-					<td>None  /  Limited  /  Moderate  /  Adequate  /  Excessive</td>
-					<td></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-				<tr>
-					<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Liming:</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' width='120'>Last Limed (year):</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' align='right' width='100'>Qty (tons):</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' align='right' width='120'>Did we apply lime?</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Fertilizing: </td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td valign='bottom' align='right' width='100'>Type:</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' align='right' width='120'>Do we fertilize?</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Feeding:  </td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td valign='bottom' align='right' width='100'>Type:</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' align='right' width='120'>Qty (feeders):</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-				<tr>
-					<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Structure: </td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td valign='bottom' align='right' width='100'>Type:</td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-
-				</tr>
-				<tr>
-					<td width='135' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Initial Fish Stocking:</td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-				</tr>
-				<tr>
-					<td width='145' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Recent Fish Stocking:<br /><small style={{fontSize:"9px", fontWeight:"normal"}}>(from sources other than SEPM)</small></td>
-					<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='right' width='90'>Year:</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='90'>Source:</td>
-					<td className='bottomborder' colSpan="2">Testing</td>
-					<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='90'>Species:</td>
-					<td className='bottomborder' colSpan="2">Testing</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
-				<tr>
-					<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Grass Carp:</td>
-					<td className='bottomborder' colSpan='3'>Testing</td>
-					<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='right' width='120'>Number Stocked:</td>
-					<td className='bottomborder'>Testing</td>
-					<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='120'>When:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table width='100%' style={{border:"2px solid #000"}} cellPadding='8' cellSpacing='0'>
-				<tr>
-					<th style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Aquatic Weeds Observed</th>
-					<th style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Coverage</th>
-					<th style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>% Percentage</th>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-<pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page3">
-	<tr>
-		<td valign='middle'>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td align='center' valign='middle'>
-						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
-								<td className='bottomborder' width='110'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='10'></td>
-					<td align='right' valign='middle' className='page'>PAGE 3</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='10'>
-				<tr>
-					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
-							<tr>
-								<td style={{border:"none"}}>
+								<td align='center' valign='middle'>
 									<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
 										<tr>
-											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Alkalinity</td>
-											<td className='bottomborder' align='center'>Testing</td>
-											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>ppm</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
+											<td className='bottomborder' width='110'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='10'></td>
+								<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 2</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td style={{fontSize:"14px",fontFamily:"Arial", fontWeight:"bold"}}><u>Pond Assessment / Water Control / Physical Characteristics</u></td>
+				</tr>
+				<tr>
+					<td>
+						<table width='100%' cellPadding='4' cellSpacing='3' border='0'>
+							<tr>
+								<td>
+									<table  width='100%' cellPadding='0' cellSpacing='0' border='0'>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='200'>Date of Impoundment:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='120' align='center'>Dam Type:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+
+
+							</tr>
+							<tr>
+								<td>
+									<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+										<tr>
+											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='200'>Emergency Spillway:</td>
+											<td align='left'>
+												<table width='120' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+															<tr>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Yes</span></td>
+																<td width="30"></td>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>No</span></td>
+
+															</tr>
+														</table>
+												</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center' colSpan=''>Spillway Material:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+										<tr>
+											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='200'>Mechanical Spillway:</td>
+											<td align='left'>
+												<table width='120' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+															<tr>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Yes</span></td>
+																<td width="30"></td>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>No</span></td>
+
+															</tr>
+														</table>
+												</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center'>Diameter (in):</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Material:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
+											<td className='bottomborder'>Testing</td>
+
 										</tr>
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+										<tr>
+											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='200'>Trash Rack:</td>
+											<td align='left'>
+												<table width='120' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+															<tr>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Yes</span></td>
+																<td width="30"></td>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>No</span></td>
 
+															</tr>
+														</table>
+												</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' align='center'>Diameter (in):</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Material:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='90' align='center'>Condition:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr>
 					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+						<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
 							<tr>
-								<td style={{border:"none"}}>
+								<td>
+									<table width='100%' cellPadding='5' cellSpacing='4' border='0'>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Water Source:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Depth:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Topography:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Soil Type:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Landscape:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Soil Condition:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='80'></td>
+								<td width='400'>
+									<table width='100%' cellPadding='5' cellSpacing='10' border='0'>
+										<tr>
+											<td colSpan='2' style={{fontSize:"16px",fontFamily:"Arial", fontWeight:"bold"}} align='center'><u>Water Characteristics</u></td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Fertility Level:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Plankton Bloom:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Suspended Solids:</td>
+											<td align='left'>
+												<table width='120' cellSpacing='0' cellSpacing='0' border='0' style={{margin:"0"}}>
+															<tr>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Yes</span></td>
+																<td width="30"></td>
+																<td width='21'><input type='checkbox'/></td>
+																<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>No</span></td>
+
+															</tr>
+														</table>
+												</td>
+										</tr>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='150'>Water Level:</td>
+											<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='80'></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td style={{fontSize:"16px",fontFamily:"Arial", fontWeight:"bold"}}><u>Pond Management History</u></td>
+				</tr>
+				<tr>
+					<td>
+						<table width='100%' cellPadding='5' cellSpacing='5' border='0'>
+							<tr>
+								<td width='150' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Fish Harvest:</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='100'>Bass</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom' width='350' align='right'>Annual Pounds Removed:</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='150'></td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Bluegill</td>
+								<td className='bottomborder'>Testing</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td width='150'></td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Other (specify)</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial"}}>None  /  Limited  /  Moderate  /  Adequate  /  Excessive</td>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width='100%' cellPadding='5' cellSpacing='5' border='0'>
+							<tr>
+								<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Liming:</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} width='120'>Last Limed (year):</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='100'>Qty (tons):</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='120'>Did we apply lime?</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Fertilizing: </td>
+								<td className='bottomborder' colSpan='3'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='100'>Type:</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='120'>Do we fertilize?</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Feeding:  </td>
+								<td className='bottomborder' colSpan='3'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='100'>Type:</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='120'>Qty (feeders):</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+							<tr>
+								<td width='100' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Structure: </td>
+								<td className='bottomborder' colSpan='3'>Testing</td>
+								<td valign='bottom' style={{fontSize:"11px", fontFamily:"Arial"}} align='right' width='100'>Type:</td>
+								<td className='bottomborder' colSpan='3'>Testing</td>
+
+							</tr>
+							<tr>
+								<td  align='left' colSpan='9'>
+								<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+									<tr>
+										<td width='200' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Initial Fish Stocking:</td>
+										<td className='bottomborder'>Testing</td>
+									</tr>
+								</table>
+								</td>
+
+
+							</tr>
+							<tr>
+								<td colSpan='9' align='left'>
+									<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+										<tr>
+										<td width='230' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Recent Fish Stocking:<br /><small style={{fontSize:"9px", fontWeight:"normal"}}>(from sources other than SEPM)</small></td>
+										<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='right' width='110'>Year:</td>
+										<td className='bottomborder'>Testing</td>
+										<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='110'>Source:</td>
+										<td className='bottomborder'>Testing</td>
+										<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='110'>Species:</td>
+										<td className='bottomborder'>Testing</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width='100%' cellPadding='5' cellSpacing='5' border='0'>
+							<tr>
+								<td width='120' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} valign='bottom'>Grass Carp:</td>
+								<td className='bottomborder' colSpan='3'>Testing</td>
+								<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='right' width='180'>Number Stocked:</td>
+								<td className='bottomborder'>Testing</td>
+								<td valign='bottom' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}  align='right' width='120'>When:</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width='100%' style={{border:"2px solid #000"}} cellPadding='5' cellSpacing='0'>
+							<tr>
+								<th style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Aquatic Weeds Observed</th>
+								<th style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Coverage</th>
+								<th style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>% Percentage</th>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>&nbsp;</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<pre><br clear="all" className="page-break"/></pre>
+			<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page3">
+				<tr>
+					<td valign='middle'>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td align='center' valign='middle'>
 									<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
 										<tr>
-											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60' align='center'>*Insert Tag Numbers below
-											length/weight data in
-											'Logged' columns</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
+											<td className='bottomborder' width='110'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='10'></td>
+								<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 3</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='10'>
+							<tr>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+										<tr>
+											<td style={{border:"none"}}>
+												<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+													<tr>
+														<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Alkalinity</td>
+														<td className='bottomborder' align='center'>Testing</td>
+														<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>ppm</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+									</table>
+								</td>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+										<tr>
+											<td style={{border:"none"}}>
+												<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+													<tr>
+														<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60' align='center'>*Insert Tag Numbers below
+														length/weight data in
+														'Logged' columns</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+									</table>
+								</td>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+										<tr>
+											<td style={{border:"none"}}>
+												<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+													<tr>
+														<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Alkalinity</td>
+														<td className='bottomborder' align='center'>Testing</td>
+														<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>ppm</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='100'>Reproduction:</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='90' align="right">Harvested:</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='180' align="right">Population Status:</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='80' align="right">Other:</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td colSpan='2' align='left' style={{fontSize:"12px",fontFamily:"Arial", fontWeight:"bold"}} bgcolor='#d2d2d2'>Logged LMB Details</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+										<tr>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Fish #</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Millimeter</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Grams</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Recapture</th>
+										</tr>
+										<tr>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+										</tr>
+									</table>
+								</td>
+								<td width='20'></td>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+										<tr>
+											<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Fish #</th>
+											<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Millimeter</th>
+											<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Grams</th>
+											<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Recapture</th>
+										</tr>
+										<tr>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
+						</table>
 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Fish #</th>
+								<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Millimeter</th>
+								<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Grams</th>
+								<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Tag #</th>
+								<th bgcolor='#d2d2d2'  style={{fontFamily:"Arial", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Recapture</th>
+							</tr>
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
 						</table>
 					</td>
+				</tr>
+				<tr>
 					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='2' cellSpacing='15'>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
 							<tr>
-								<td style={{border:"none"}}>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Logged LMB<br /><small>Length (Inches)</small></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>28</td>
+							</tr>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>LMB (unlogged)<br /><small>Length (Inches)</small></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20</td>
+							</tr>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='180'>Reproduction :</td>
+								<td className='bottomborder'>Testing</td>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='160'>Bluegill Type :</td>
+								<td className='bottomborder'>Testing</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td colSpan='2' align='left' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} bgcolor='#d2d2d2'>Logged Bluegill Details</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+										<tr>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Fish #</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Millimeter</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Grams</th>
+										</tr>
+										<tr>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+										</tr>
+									</table>
+								</td>
+								<td width='20'></td>
+								<td>
+									<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+										<tr>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Fish #</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Millimeter</th>
+											<th bgcolor='#d2d2d2' style={{fontFamily:"Arial", borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"12px", fontWeight:"bold"}}>Grams</th>
+										</tr>
+										<tr>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+											<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Logged Bluegill<br /><small>Length (Inches)</small></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
+							</tr>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Bluegill (unlogged)<br /><small>Length (Inches)</small></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
+							</tr>
+							<tr>
+								<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<pre><br clear="all" className="page-break"/></pre>
+			<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page4">
+				<tr>
+					<td valign='middle'>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td align='center' valign='middle'>
 									<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
 										<tr>
-											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Alkalinity</td>
-											<td className='bottomborder' align='center'>Testing</td>
-											<td  style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>ppm</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
+											<td className='bottomborder' width='110'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='10'></td>
+								<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 4</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table  style={{border:"2px solid #000"}} width='100%' bordercolor='#000' cellPadding='5' cellSpacing='0'>
+							<tr>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Shellcracker<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Threadfin shad<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Crappie<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Catfish<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gizzard Shad<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gold. Shiner<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+							<tr>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<pre><br clear="all" className="page-break"/></pre>
+			<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page5">
+				<tr>
+					<td valign='middle'>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td align='center' valign='middle'>
+									<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+										<tr>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
+											<td className='bottomborder'>Testing</td>
+											<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
+											<td className='bottomborder' width='110'>Testing</td>
+										</tr>
+									</table>
+								</td>
+								<td width='10'></td>
+								<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 5</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
+							<tr>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>EVALUATION SUMMARY / NOTES</td>
+							</tr>
+							<tr height='100'>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table border='0' width='100%' cellPadding='0' cellSpacing='0' >
+							<tr>
+								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='center' colSpan='2'>RECOMMENDED MANAGEMENT ACTIVITIES</td>
+							</tr>
+							<tr>
+								<td valign='top'>
+									<table width='100%' cellPadding='0' cellSpacing='5'>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Lime Application</td>
+																</tr>
+																<tr>
+																	<td><table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td  width='280'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Agricultural lime application:</span></td><td className='bottomborder' width='60'></td><td style={{fontSize:"12px", fontFamily:"Arial"}}>tons/acre</td></tr></table></td>
+																</tr>
+																<tr>
+																	<td>
+																	<table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td width='20'></td><td><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Tum-key</span></td><td><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Application Only</span></td><td><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>They Load</span></td></tr></table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Feritilization</td>
+																</tr>
+																<tr>
+																	<td><table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Fertilizer (bulk)</span></td><td><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Fertilizer (route)</span></td></tr></table></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Supplemental Forage Options</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='320'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Intermediate coppernose bluegill</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Crawfish</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>lbs/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Golden shiners</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Tilapia</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>lbs/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Threadfin shad</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>loads</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Gizzard sad</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>loads/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Other:</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Weed Control</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Herbicide Application</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>(chemical name)</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Grass carp: diploid / triploid</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td></td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Aquashade:</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>gallons</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Supplemental Feeding</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Begin program:</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>feeders</td>
+																				<td width='60'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>Model</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Maintain program</span></td>
+																				<td  width='60'></td>
+																				<td width='80'></td>
+																				<td width='60'></td>
+																				<td width='60'></td>
+																				<td >&nbsp;</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Intensify program:</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>feeders</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>Model</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Trash Rack</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Standpipe diameter</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>inches</td>
+																				<td width='60'></td>
+																				<td width='60'></td>
+																				<td>&nbsp;</td>
+																				<td width='60'></td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Install trash rack</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>inches</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>up</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>down</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Corrective re-stocking/genetics</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Adult LMB</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>(type)</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(size)</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(quanity)</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Fing. LMB</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>(type)</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(size)</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(quanity)</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Coppernose Bluegill</span></td>
+																				<td width='60'></td>
+																				<td width='80'></td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(size)</td>
+																				<td className='bottomborder' width='80'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(quanity)</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Maintenance</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Annual Ealuation</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>(Month/Year)</td>
+																			</tr>
+
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td valign='top'>
+									<table width='100%' cellPadding='0' cellSpacing='5'>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recreational Stoking Options</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Trout</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Hybrid striped bass</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Channel catfish</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Feed-trained LMB</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Crappie</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Smallmouth bass</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Jumbo LMB</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>lbs</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Shellcracker</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>/acre</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Fish Harvest</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Harvest</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>inch</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='30' style={{fontSize:"12px", fontFamily:"Arial"}}>@</td>
+																				<td className='bottomborder' width='60'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>lbs/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Harvest</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>inch</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='30' style={{fontSize:"12px", fontFamily:"Arial"}}>@</td>
+																				<td className='bottomborder' width='60'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>lbs/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Harvest</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>inch</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='30' style={{fontSize:"12px", fontFamily:"Arial"}}>@</td>
+																				<td className='bottomborder' width='60'>&nbsp;</td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>lbs/acre</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Suspend Harvest</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>(species)</td>
+																				<td width='60'></td>
+																				<td width='30'></td>
+																				<td>&nbsp;</td>
+																				<td width='60'></td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Electrofishing</span></td>
+																				<td className='bottomborder' width='60'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>hours</td>
+																				<td width='60'></td>
+																				<td width='30'></td>
+																				<td>&nbsp;</td>
+																				<td width='60'></td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Aeration/Destratification</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Destrat System:</span></td>
+																				<td className='bottomborder' width='100'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>size/type</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Install fountain:</span></td>
+																				<td className='bottomborder' width='100'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>size/type</td>
+																			</tr>
+																			<tr>
+																				<td  width='200'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Install aerator:</span></td>
+																				<td className='bottomborder' width='100'></td>
+																				<td style={{fontSize:"12px", fontFamily:"Arial"}}>size/type</td>
+																			</tr>
+
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
+													<tr>
+														<td>
+															<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
+																<tr>
+																	<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recreational Stoking Options</td>
+																</tr>
+																<tr>
+																	<td>
+																		<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Add Structure</span></td>
+																				<td width='60'></td>
+																				<td width='80'></td>
+																				<td width='60'></td>
+																				<td width='60'></td>
+																				</tr>
+																			<tr>
+																				<td colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Drain pond--? Re-stock letter</span></td>
+
+																			</tr>
+																			<tr>
+																				<td  colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>PondToon information requested</span></td>
+																				</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Deliver fish food</span></td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>(type)</td>
+																				<td width='60' className='bottomborder'></td>
+																				<td width='60' style={{fontSize:"12px", fontFamily:"Arial"}}>(#bags)</td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Install fish barrier:</span></td>
+																				<td width='100' className='bottomborder'></td>
+																				<td width='80' colSpan='2' style={{fontSize:"12px", fontFamily:"Arial"}}>(typespillway width)</td>
+																				<td width='60'></td>
+																			</tr>
+																			<tr>
+																				<td  width='260'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Nuisance animal control:</span></td>
+																				<td width='100' className='bottomborder'></td>
+																				<td width='80' style={{fontSize:"12px", fontFamily:"Arial"}}>(species)</td>
+																				<td width='60'></td>
+																				<td width='60'></td>
+																			</tr>
+																			<tr>
+																				<td colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Dam and shoreline maintenance</span></td>
+
+																			</tr>
+																			<tr>
+																				<td colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Install siphon system</span></td>
+
+																			</tr>
+																			<tr>
+																				<td colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Rotenone application (control shad)</span></td>
+
+																			</tr>
+																			<tr>
+																				<td colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Rotenone application (complete renovation)</span></td>
+
+																			</tr>
+																			<tr>
+																				<td  colSpan='5'><input type='checkbox'/><span style={{margin:"0 5px",fontSize:"12px", fontFamily:"Arial"}}>Siltation/turbidity control</span></td>
+
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+
+												</table>
+											</td>
 										</tr>
 									</table>
 								</td>
 							</tr>
-
 						</table>
 					</td>
 				</tr>
 			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='90'>Reproduction:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='90' align="right">Harvested:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='130' align="right">Population Status:</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='80' align="right">Other:</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td colSpan='2' align='left' style={{fontSize:"13px", fontWeight:"bold"}} bgcolor='#d2d2d2'>Logged LMB Details</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-							<tr>
-								<th bgcolor='#d2d2d2' style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Fish #</th>
-								<th bgcolor='#d2d2d2' style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Millimeter</th>
-								<th bgcolor='#d2d2d2' style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Grams</th>
-								<th bgcolor='#d2d2d2' style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Recapture</th>
-							</tr>
-							<tr>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-							</tr>
-						</table>
-					</td>
-					<td width='20'></td>
-					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-							<tr>
-								<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Fish #</th>
-								<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Millimeter</th>
-								<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Grams</th>
-								<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Recapture</th>
-							</tr>
-							<tr>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Fish #</th>
-					<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Millimeter</th>
-					<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Grams</th>
-					<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Tag #</th>
-					<th bgcolor='#d2d2d2'  style={{borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Recapture</th>
-				</tr>
-				<tr>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Logged LMB<br /><small>Length (Inches)</small></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>28</td>
-				</tr>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>LMB (unlogged)<br /><small>Length (Inches)</small></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20</td>
-				</tr>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='100'>Reproduction :</td>
-					<td className='bottomborder'>Testing</td>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='100'>Bluegill Type :</td>
-					<td className='bottomborder'>Testing</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td colSpan='2' align='left' style={{fontSize:"13px", fontWeight:"bold"}} bgcolor='#d2d2d2'>Logged Bluegill Details</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-							<tr>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Fish #</th>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Millimeter</th>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Grams</th>
-							</tr>
-							<tr>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-							</tr>
-						</table>
-					</td>
-					<td width='20'></td>
-					<td>
-						<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-							<tr>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Fish #</th>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Millimeter</th>
-								<th bgcolor='#d2d2d2' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000", fontSize:"13px", fontWeight:"bold"}}>Grams</th>
-							</tr>
-							<tr>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Logged Bluegill<br /><small>Length (Inches)</small></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
-				</tr>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style={{border:"2px solid #000"}} width='100%' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Bluegill (unlogged)<br /><small>Length (Inches)</small></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12</td>
-				</tr>
-				<tr>
-					<td bgcolor='#d2d2d2' style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120'>Count</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-<pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page4">
+			<pre><br clear="all" className="page-break"/></pre>
+			<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page6">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
@@ -1113,937 +2258,7 @@ export default function Electroeval() {
 						</table>
 					</td>
 					<td width='10'></td>
-					<td align='right' valign='middle' className='page'>PAGE 4</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table  style={{border:"2px solid #000"}} width='100%' bordercolor='#000' cellPadding='5' cellSpacing='0'>
-				<tr>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Shellcracker<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Threadfin shad<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Crappie<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Catfish<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gizzard Shad<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gold. Shiner<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
-					<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-				<tr>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-					<td align='center' style={{borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-<pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page5">
-	<tr>
-		<td valign='middle'>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td align='center' valign='middle'>
-						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
-								<td className='bottomborder' width='110'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='10'></td>
-					<td align='right' valign='middle' className='page'>PAGE 5</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>EVALUATION SUMMARY / NOTES</td>
-				</tr>
-				<tr height='100'>
-					<td></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0' >
-				<tr>
-					<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} align='center' colSpan='2'>RECOMMENDED MANAGEMENT ACTIVITIES</td>
-				</tr>
-				<tr>
-					<td valign='top'>
-						<table width='100%' cellPadding='0' cellSpacing='5'>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Lime Application</td>
-													</tr>
-													<tr>
-														<td><table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td  width='200'><input type='checkbox'/><label className='checklabel'>Agricultural lime application:</label></td><td className='bottomborder' width='60'></td><td>tons/acre</td></tr></table></td>
-													</tr>
-													<tr>
-														<td>
-														<table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td width='20'></td><td><input type='checkbox'/><label className='checklabel'>Tum-key</label></td><td><input type='checkbox'/><label className='checklabel'>Application Only</label></td><td><input type='checkbox'/><label className='checklabel'>They Load</label></td></tr></table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Feritilization</td>
-													</tr>
-													<tr>
-														<td><table width='100%' cellPadding='0' cellSpacing='0' border='0'><tr><td><input type='checkbox'/><label className='checklabel'>Fertilizer (bulk)</label></td><td><input type='checkbox'/><label className='checklabel'>Fertilizer (route)</label></td></tr></table></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Supplemental Forage Options</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Intermediate coppernose bluegill</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Crawfish</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>lbs/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Golden shiners</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Tilapia</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>lbs/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Threadfin shad</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>loads</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Gizzard sad</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>loads/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Other:</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Weed Control</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Herbicide Application</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>(chemical name)</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Grass carp: diploid / triploid</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td></td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Aquashade:</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>gallons</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Supplemental Feeding</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Begin program:</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>feeders</td>
-																	<td width='60'></td>
-																	<td width='60'>Model</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Maintain program</label></td>
-																	<td  width='60'></td>
-																	<td width='80'></td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-																	<td >&nbsp;</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Intensify program:</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>feeders</td>
-																	<td width='60'></td>
-																	<td width='60'>Model</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Trash Rack</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Standpipe diameter</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>inches</td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-																	<td>&nbsp;</td>
-																	<td width='60'></td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Install trash rack</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>inches</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='60'>up</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																	<td width='60'>down</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Corrective re-stocking/genetics</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Adult LMB</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>(type)</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='60'>(size)</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																	<td width='60'>(quanity)</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Fing. LMB</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>(type)</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='60'>(size)</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																	<td width='60'>(quanity)</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Coppernose Bluegill</label></td>
-																	<td width='60'></td>
-																	<td width='80'></td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='60'>(size)</td>
-																	<td className='bottomborder' width='80'>&nbsp;</td>
-																	<td width='60'>(quanity)</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Maintenance</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Annual Ealuation</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>(Month/Year)</td>
-																</tr>
-
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-					<td valign='top'>
-						<table width='100%' cellPadding='0' cellSpacing='5'>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recreational Stoking Options</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Trout</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Hybrid striped bass</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Channel catfish</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Feed-trained LMB</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Crappie</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Smallmouth bass</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Jumbo LMB</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>lbs</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Shellcracker</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td>/acre</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Fish Harvest</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Harvest</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>inch</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='3	0'>@</td>
-																	<td className='bottomborder' width='60'>&nbsp;</td>
-																	<td width='60'>lbs/acre</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Harvest</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>inch</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='30'>@</td>
-																	<td className='bottomborder' width='60'>&nbsp;</td>
-																	<td width='60'>lbs/acre</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Harvest</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>inch</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='30'>@</td>
-																	<td className='bottomborder' width='60'>&nbsp;</td>
-																	<td width='60'>lbs/acre</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Suspend Harvest</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>(species)</td>
-																	<td width='60'></td>
-																	<td width='30'></td>
-																	<td>&nbsp;</td>
-																	<td width='60'></td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Electrofishing</label></td>
-																	<td className='bottomborder' width='60'></td>
-																	<td width='80'>hours</td>
-																	<td width='60'></td>
-																	<td width='30'></td>
-																	<td>&nbsp;</td>
-																	<td width='60'></td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Aeration/Destratification</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Destrat System:</label></td>
-																	<td className='bottomborder' width='100'></td>
-																	<td>size/type</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Install fountain:</label></td>
-																	<td className='bottomborder' width='100'></td>
-																	<td>size/type</td>
-																</tr>
-																<tr>
-																	<td  width='200'><input type='checkbox'/><label className='checklabel'>Install aerator:</label></td>
-																	<td className='bottomborder' width='100'></td>
-																	<td>size/type</td>
-																</tr>
-
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width='100%' cellPadding='0' cellSpacing='0' style={{border:"2px solid #000"}}>
-										<tr>
-											<td>
-												<table width='100%' cellPadding='5' cellSpacing='0' border='0'>
-													<tr>
-														<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}}>Recreational Stoking Options</td>
-													</tr>
-													<tr>
-														<td>
-															<table width='100%' cellPadding='0' cellSpacing='0' border='0'>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Add Structure</label></td>
-																	<td width='60'></td>
-																	<td width='80'></td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-																	</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Drain pond--? Re-stock letter</label></td>
-																	<td width='60'></td>
-																	<td width='80'></td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>PondToon information requested</label></td>
-																	<td width='60'></td>
-																	<td width='80'></td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-																	</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Deliver fish food</label></td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='80'>(type)</td>
-																	<td width='60' className='bottomborder'></td>
-																	<td width='60'>(#bags)</td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Install fish barrier:</label></td>
-																	<td width='100' className='bottomborder'></td>
-																	<td width='80' colSpan='2'>(typespillway width)</td>
-																	<td width='60'></td>
-																</tr>
-																<tr>
-																	<td  width='260'><input type='checkbox'/><label className='checklabel'>Nuisance animal control:</label></td>
-																	<td width='100' className='bottomborder'></td>
-																	<td width='80'>(species)</td>
-																	<td width='60'></td>
-																	<td width='60'></td>
-																</tr>
-																<tr>
-																	<td colSpan='5'><input type='checkbox'/><label className='checklabel'>Dam and shoreline maintenance</label></td>
-
-																</tr>
-																<tr>
-																	<td colSpan='5'><input type='checkbox'/><label className='checklabel'>Install siphon system</label></td>
-
-																</tr>
-																<tr>
-																	<td colSpan='5'><input type='checkbox'/><label className='checklabel'>Rotenone application (control shad)</label></td>
-
-																</tr>
-																<tr>
-																	<td colSpan='5'><input type='checkbox'/><label className='checklabel'>Rotenone application (complete renovation)</label></td>
-
-																</tr>
-																<tr>
-																	<td  colSpan='5'><input type='checkbox'/><label className='checklabel'>Siltation/turbidity control</label></td>
-
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-<pre><br clear="all" className="page-break"/></pre>
-<table border='0' width='100%' cellPadding='5' cellSpacing='0' style={{marginTop:"35px"}} className="page6">
-	<tr>
-		<td valign='middle'>
-			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-				<tr>
-					<td align='center' valign='middle'>
-						<table border='0' width='100%' cellPadding='0' cellSpacing='0'>
-							<tr>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'>Client</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='120' align='center'>Pond Name:</td>
-								<td className='bottomborder'>Testing</td>
-								<td style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold"}} width='60'  align='center'>Date:</td>
-								<td className='bottomborder' width='110'>Testing</td>
-							</tr>
-						</table>
-					</td>
-					<td width='10'></td>
-					<td align='right' valign='middle' className='page'>PAGE 6</td>
+					<td align='right' valign='middle' style={{fontSize:"13px",fontFamily:"Arial", border:"2px solid #000",padding:"5px", textAlign:"center", width:"80px"}}>PAGE 6</td>
 				</tr>
 			</table>
 		</td>
@@ -2052,163 +2267,1119 @@ export default function Electroeval() {
 		<td>
 			<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
 				<tr>
-					<td valign='top'>
-						<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-							<tr><td className='red bold'><input type='checkbox'/>Cover Letter</td></tr>
-							<tr><td className='red bold'><input type='checkbox'/>I. Cover Page</td></tr>
-							<tr><td className='red bold'><input type='checkbox'/>II. Introduction</td></tr>
-							<tr><td className='red bold'><input type='checkbox'/>III. Pond Assessment</td></tr>
-							<tr><td className='green bold'><input type='checkbox'/>IV. Fish Community Balance</td></tr>
-							<tr><td className='red bold'><input type='checkbox'/>V. Fishery Assessment</td></tr>
-							<tr><td className='red bold'><input type='checkbox'/>VI. Tag data (optional)</td></tr>
-							<tr><td className='margining red bold'>VII.	 Current State Of Balance (<b>MUST</b> choose <b>ALL</b> that apply)</td></tr>
-							<tr><td className='red'><input type='checkbox'/>BAL (Balance)</td></tr>
-							<tr><td className='red'><input type='checkbox'/>PC (Predator-Crowded)</td></tr>
-							<tr><td className='red'><input type='checkbox'/>FC (Forage-Crowded)</td></tr>
-							<tr><td><input type='checkbox'/>COM-PRED (CompetingPredator Species)</td></tr>
-							<tr><td><input type='checkbox'/>COM-PREY (Competing Prey Species)</td></tr>
-							 <tr><td className='margining bold'>VIII. Recommended Management Activities</td></tr>
-							 <tr><td className='label2 bold green'>1. Fish Harvest (MUST choose <b>ONLY</b> one)</td></tr>
-							<tr><td className='green'><input type='checkbox'/>HBN (Harvest Bass - No)</td></tr>
-							<tr><td className='green'><input type='checkbox'/>HBY (Harvest Bass - Yes)</td></tr>
-							<tr><td className='green'><input type='checkbox'/>HBYL (Harvest Bass - Yes Light)</td></tr>
-							 <tr><td className='label2 bold'>2. Lime Application <small className='small' style={{fontWeight:"normal"}}>(if applicable)</small></td></tr>
-							 <tr><td className='label2 bold'>3. Fertilization <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td></tr>
-							<tr><td><input type='checkbox'/>FERT (Fertilization - SportMax Service Route and Bulk SportMax Options)</td></tr>
-							<tr><td><input type='checkbox'/>FERT - SR (SportMax Service Route Emphasis)</td></tr>
-							<tr><td><input type='checkbox'/>FERT - SPORT (Bulk SportMax Emphasis)</td></tr>
-							<tr><td><input type='checkbox'/>FERT - SRL (Liquid Service Route Emphasis)</td></tr>
-							<tr><td><input type='checkbox'/>FERT - BTFP (Bulk Tank Fertilizer Program)</td></tr>
-							 <tr><td className='label2 bold'>4. Supplemental Bass Stocking <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td></tr>
-							<tr><td><input type='checkbox'/>SBS - All Bass (F1, Northern, Feed-trained)</td></tr>
-							<tr><td><input type='checkbox'/>SBS - FT (Feed-trained)</td></tr>
-							<tr><td><input type='checkbox'/>SBS - Genetic Shift (F1, Northern, Feed-trained)</td></tr>
-							<tr><td className='label2 bold'>5. Supplemental Bass Stocking  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td></tr>
-							<tr><td><input type='checkbox'/>SFS - 1 (TFS, CNB, TILAPIA, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 2 (TFS, CNB, TILAPIA)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 3 (TFS, CNB, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 4 (TFS, TILAPIA, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 5 (TFS, TILAPIA)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 6 (TFS, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 7 (TFS, CNB)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 8 (TFS with GZS Present and Reproducing)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 9 (TFS after GZS are Reduced with Rotenone)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 10 (TFS)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 11 (CNB, TILAPIA, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 12 (CNB, TILAPIA)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 13 (CNB, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 14 (CNB)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 15 (CNB Genetics)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 16 (TILAPIA, CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 17 (TILAPIA)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 18 (CRAWFISH)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 19 (GOS)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 20 (GZS with TFS Present)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - 21 (GZS)</td></tr>
-							<tr><td className='label2 bold'>6. Supplemental Forage Stocking  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ALL</b> that apply if applicable)</small></td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP1 (TFS with GZS Present and Reproducing; behind SFS section)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP2 (TFS after GZS are Reduced with Rotenone; behind SFS section)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP3 (CNB Genetics; behind SFS section)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP4 (GOS; behind SFS section)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP5 (GZS with TFS Present; behind SFS section)</td></tr>
-							<tr><td><input type='checkbox'/>SFS - AP6 (GZS; behind SFS section)</td></tr>
+					<td>
+						<table width='100%' cellPadding='2' cellSpacing='0' border='0' >
+							<tr>
+								<td style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>Cover Letter</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>I. Cover Page</td>
+										</tr>
+									</table>
+							</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>II. Introduction</td>
+										</tr>
+									</table>
+
+							</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>III. Pond Assessment</td>
+										</tr>
+									</table>
+
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='green bold'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='green bold'>IV. Fish Community Balance</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>V. Fishery Assessment</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>VI. Tag data (optional)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red bold'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red bold'>VII.Current State Of Balance (<b>MUST</b> choose <b>ALL</b> that apply)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red'>BAL (Balance)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red'>PC (Predator-Crowded)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='red'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='red'>FC (Forage-Crowded)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>COM-PRED (CompetingPredator Species)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>COM-PREY (Competing Prey Species)</td>
+										</tr>
+									</table>
+								</td></tr>
+							 <tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+
+								 <table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'> VIII. Recommended Management Activities</td>
+										</tr>
+									</table>
+								 </td></tr>
+							 <tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 green bold'>
+
+								 <table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='label2 bold green'> 1. Fish Harvest (MUST choose <b>ONLY</b> one)</td>
+										</tr>
+									</table>
+								 </td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='green'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'> HBN (Harvest Bass - No)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>HBY (Harvest Bass - Yes)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>HBYL (Harvest Bass - Yes Light)</td>
+										</tr>
+									</table>
+								</td></tr>
+							 <tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+								 <table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>2. Lime Application <small className='small' style={{fontWeight:"normal"}}>(if applicable)</small></td>
+										</tr>
+									</table>
+								 </td></tr>
+							 <tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+
+								 <table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'> 3. Fertilization <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td>
+										</tr>
+									</table>
+								 </td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} > 3. Fertilization <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} > FERT - SR (SportMax Service Route Emphasis)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >FERT - SPORT (Bulk SportMax Emphasis)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >FERT - SRL (Liquid Service Route Emphasis)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >FERT - BTFP (Bulk Tank Fertilizer Program)</td>
+										</tr>
+									</table>
+								</td></tr>
+							 <tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+
+								 <table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}   className='label2 bold'>4. Supplemental Bass Stocking <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td>
+										</tr>
+									</table>
+								 </td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SBS - All Bass (F1, Northern, Feed-trained)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SBS - FT (Feed-trained)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SBS - Genetic Shift (F1, Northern, Feed-trained)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >5. Supplemental Bass Stocking  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 1 (TFS, CNB, TILAPIA, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 2 (TFS, CNB, TILAPIA)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 3 (TFS, CNB, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 4 (TFS, TILAPIA, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 5 (TFS, TILAPIA)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 6 (TFS, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 7 (TFS, CNB)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 8 (TFS with GZS Present and Reproducing)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 9 (TFS after GZS are Reduced with Rotenone)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 10 (TFS)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 11 (CNB, TILAPIA, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 12 (CNB, TILAPIA)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 13 (CNB, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 14 (CNB)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 15 (CNB Genetics)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 16 (TILAPIA, CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 17 (TILAPIA)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 18 (CRAWFISH)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 19 (GOS)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 20 (GZS with TFS Present)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - 21 (GZS)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>6. Supplemental Forage Stocking  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ALL</b> that apply if applicable)</small></td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP1 (TFS with GZS Present and Reproducing; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP2 (TFS after GZS are Reduced with Rotenone; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP3 (CNB Genetics; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP4 (GOS; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP5 (GZS with TFS Present; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >SFS - AP6 (GZS; behind SFS section)</td>
+										</tr>
+									</table>
+								</td></tr>
 						</table>
 					</td>
 					<td valign='top'>
 						<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-							<tr><td className='label2 bold'>7. Supplemental Feeding  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td></tr>
-							<tr><td><input type='checkbox'/>BFP (Begin Feeding Program)</td></tr>
-							<tr><td><input type='checkbox'/>IFP (Intensify Feeding Program)</td></tr>
-							<tr><td><input type='checkbox'/>CFP (Continue Feeding Program)</td></tr>
-							<tr><td className='label2 green bold'>8. Aquatic Weed Contro  <small className='small' style={{fontWeight:"normal"}}>(<b>MUST</b> choose ONLY one)</small></td></tr>
-							<tr><td className='green'><input type='checkbox'/>AWC - NWP (No Weeds Present)</td></tr>
-							<tr><td  className='green'><input type='checkbox'/>AWC - WP (Weeds Present - 3 Control Methods)</td></tr>
-							<tr><td  className='green'><input type='checkbox'/>AWC - WPGC (Weeds Present - Grass Carp Emphasis)</td></tr>
-							<tr><td  className='green'><input type='checkbox'/>AWC - WPH (Weeds Present - Herbicide Emphasis)</td></tr>
-							<tr><td  className='green'><input type='checkbox'/>AWC - WPGCH (Weeds Present - Grass Carp & Herbicide)</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >7. Supplemental Feeding  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ONLY</b> one if applicable)</small></td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >BFP (Begin Feeding Program)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >IFP (Intensify Feeding Program)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} >CFP (Continue Feeding Program)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 green bold'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}} className='label2 green bold'>8. Aquatic Weed Contro  <small className='small' style={{fontWeight:"normal"}}>(<b>MUST</b> choose ONLY one)</small></td>
+										</tr>
+									</table>
+
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>AWC - NWP (No Weeds Present)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}   className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>AWC - WP (Weeds Present - 3 Control Methods)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}   className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>AWC - WPGC (Weeds Present - Grass Carp Emphasis)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}   className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>AWC - WPH (Weeds Present - Herbicide Emphasis)</td>
+										</tr>
+									</table>
+								</td></tr>
+							<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}   className='green'>
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'><input type='checkbox'/></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}}  className='green'>AWC - WPGCH (Weeds Present - Grass Carp & Herbicide)</td>
+										</tr>
+									</table>
+								</td></tr>
 						</table>
 						<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-							<tr><td className='label2 bold' colSpan='2'>9. Aquatic Weed ID  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ALL</b> that apply if applicable)</small></td></tr>
+							<tr><td className='label2 bold' colSpan='2'>
+
+								<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+										<tr>
+											<td width='21'></td>
+											<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}  className='label2 bold'>9. Aquatic Weed ID  <small className='small' style={{fontWeight:"normal"}}>(choose <b>ALL</b> that apply if applicable)</small></td>
+										</tr>
+									</table>
+								</td></tr>
 							<tr>
 								<td>
 									<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-										<tr><td><input type='checkbox'/>Alligatorweed</td></tr>
-										<tr><td><input type='checkbox'/>Arrow Arum</td></tr>
-										<tr><td><input type='checkbox'/>Arrowhead</td></tr>
-										<tr><td><input type='checkbox'/>Baby Tears</td></tr>
-										<tr><td><input type='checkbox'/>Banana Lily</td></tr>
-										<tr><td><input type='checkbox'/>Blue-green Algae</td></tr>
-										<tr><td><input type='checkbox'/>Black Willow</td></tr>
-										<tr><td><input type='checkbox'/>Bladderwort</td></tr>
-										<tr><td><input type='checkbox'/>Bog Moss</td></tr>
-										<tr><td><input type='checkbox'/>Brittle Pondweed</td></tr>
-										<tr><td><input type='checkbox'/>Bull Tongue (duck potato)</td></tr>
-										<tr><td><input type='checkbox'/>Bulrush</td></tr>
-										<tr><td><input type='checkbox'/>Buttonbush</td></tr>
-										<tr><td><input type='checkbox'/>Cattail</td></tr>
-										<tr><td><input type='checkbox'/>Chara</td></tr>
-										<tr><td><input type='checkbox'/>Common Water Weed</td></tr>
-										<tr><td><input type='checkbox'/>Coontail</td></tr>
-										<tr><td><input type='checkbox'/>Duckweed</td></tr>
-										<tr><td><input type='checkbox'/>Elephant Ear</td></tr>
-										<tr><td><input type='checkbox'/>Euglena</td></tr>
-										<tr><td><input type='checkbox'/>Eurasian Water Milfoil</td></tr>
-										<tr><td><input type='checkbox'/>Filamentous Algae spp.</td></tr>
-										<tr><td><input type='checkbox'/>Fragrant Water Lily</td></tr>
-										<tr><td><input type='checkbox'/>Green Algae</td></tr>
-										<tr><td><input type='checkbox'/>Hydrilla</td></tr>
-										<tr><td><input type='checkbox'/>Hydrodictyon</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Alligatorweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Arrow Arum</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Arrowhead</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Baby Tears</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Banana Lily</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Blue-green Algae</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Black Willow</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Bladderwort</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Bog Moss</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Brittle Pondweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Bull Tongue (duck potato)</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Bulrush</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Buttonbush</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Cattail</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Chara</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Common Water Weed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Coontail</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Duckweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Elephant Ear</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Euglena</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Eurasian Water Milfoil</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Filamentous Algae spp.</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Fragrant Water Lily</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Green Algae</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Hydrilla</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Hydrodictyon</td>
+												</tr>
+											</table>
+											</td></tr>
 									</table>
 
 								</td>
 								<td>
 									<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-										<tr><td><input type='checkbox'/>Lemon Bacopa</td></tr>
-										<tr><td><input type='checkbox'/>Lizard Tail</td></tr>
-										<tr><td><input type='checkbox'/>Lotus</td></tr>
-										<tr><td><input type='checkbox'/>Lyngbya</td></tr>
-										<tr><td><input type='checkbox'/>Mosquito Fern</td></tr>
-										<tr><td><input type='checkbox'/>Parrot Feather</td></tr>
-										<tr><td><input type='checkbox'/>Pickerelweed</td></tr>
-										<tr><td><input type='checkbox'/>Pondweed</td></tr>
-										<tr><td><input type='checkbox'/>Slender Spike Rush</td></tr>
-										<tr><td><input type='checkbox'/>Smartweed</td></tr>
-										<tr><td><input type='checkbox'/>Southern Naiad</td></tr>
-										<tr><td><input type='checkbox'/>Southern Water Grass</td></tr>
-										<tr><td><input type='checkbox'/>Spatterdock</td></tr>
-										<tr><td><input type='checkbox'/>Star grass</td></tr>
-										<tr><td><input type='checkbox'/>Torpedo Grass</td></tr>
-										<tr><td><input type='checkbox'/>Water Hyacinth</td></tr>
-										<tr><td><input type='checkbox'/>Water Pennywort</td></tr>
-										<tr><td><input type='checkbox'/>Water Primrose</td></tr>
-										<tr><td><input type='checkbox'/>Watershield</td></tr>
-										<tr><td><input type='checkbox'/>Water Willow</td></tr>
-										<tr><td><input type='checkbox'/>Watermeal</td></tr>
-										<tr><td><input type='checkbox'/>Waterpod</td></tr>
-										<tr><td><input type='checkbox'/>Other: </td></tr>
-										<tr><td><input type='checkbox'/>Other: </td></tr>
-										<tr><td><input type='checkbox'/>Other: </td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Lemon Bacopa</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Lizard Tail</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Lotus</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Lyngbya</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Mosquito Fern</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Parrot Feather</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Pickerelweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Pondweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Slender Spike Rush</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Smartweed</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Southern Naiad</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Southern Water Grass</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Spatterdock</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Star grass</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Torpedo Grass</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Water Hyacinth</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Water Pennywort</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Water Primrose</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Watershield</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Water Willow</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Watermeal</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Waterpod</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Other:</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+										<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Other:</td>
+												</tr>
+											</table>
+											</td></tr>
+										<tr><td style={{fontFamily:"Arial", fontSize:"11px"}} >
+											<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}}>Other:</td>
+												</tr>
+											</table>
+											</td></tr>
 									</table>
 								</td>
 							</tr>
 						</table>
 						<table width='100%' cellPadding='2' cellSpacing='0' border='0'>
-								<tr><td className='bold'><input type='checkbox'/>10. Trash Rack (if applicable)</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>11. Selective Rotenone Treatment (if applicable)</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>12. Siltation and Turbidity Control (if applicable)</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>13. Fish Attractors (if applicable)</td></tr>
-								<tr><td className='bold green'><input type='checkbox'/>14. Dam and shoreline Maintenance</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>15. Spillway Barrier (if applicable)</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>16. Siphon System (if applicable)</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>17. Nuisance Animal Control (if applicable)</td></tr>
-								<tr><td className='bold green'><input type='checkbox'/>18. Annual Evaluation</td></tr>
-								<tr><td className='bold'><input type='checkbox'/>19. Destratification System (if applicable)</td></tr>
-								<tr><td className='bold red'><input type='checkbox'/>IX. Summary of Management Recommendations</td></tr>
-								<tr><td className='bold red'><input type='checkbox'/>X.  Management Recommendations</td></tr>
-								<tr><td className='bold green'><input type='checkbox'/>XI. Recreational Stocking Options</td></tr>
-								<tr><td className='bold green'><input type='checkbox'/>XII.Records</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>10. Trash Rack (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>11. Selective Rotenone Treatment (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>12. Siltation and Turbidity Control (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>13. Fish Attractors (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold green'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}} className='bold green'>14. Dam and shoreline Maintenance</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>15. Spillway Barrier (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>16. Siphon System (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>17. Nuisance Animal Control (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold green'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}} className='bold green'>18. Annual Evaluation</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px"}} className='bold'>19. Destratification System (if applicable)</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold red'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#ff0000"}} className='bold red'>IX. Summary of Management Recommendations</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold red'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#ff0000"}} className='bold red'>X.  Management Recommendations</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold green'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}} className='bold green'>XI. Recreational Stocking Options</td>
+												</tr>
+											</table>
+									</td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold green'>
+									<table width='100%' cellSpacing='0' cellSpacing='0' border='0'>
+												<tr>
+													<td width='21'><input type='checkbox'/></td>
+													<td align='left' style={{fontFamily:"Arial", fontSize:"11px", color:"#008000"}} className='bold green'>XII.Records</td>
+												</tr>
+											</table>
+									</td></tr>
 								<tr height="50"><td className='bold green'></td></tr>
-								<tr><td className='bold green'><table width="200" cellSpacing="0" cellPadding="5" bordercolor="#000" border="1" align="center"><tr><td align="center"><u style={{fontSize:"14px", color:"#000"}}>TEMPLATE STYLE</u><span style={{fontSize:"13px", color:"#000", fontWeight:"normal", display:"block", marginTop:"10px"}}>Ongoing w/ comparison</span></td></tr></table></td></tr>
+								<tr><td style={{fontFamily:"Arial", fontSize:"11px"}}  className='bold green'><table width="200" cellSpacing="0" cellPadding="5" bordercolor="#000" border="1" align="center"><tr><td align="center"><u style={{fontSize:"14px", color:"#000"}}>TEMPLATE STYLE</u><span style={{fontSize:"13px", color:"#000", fontWeight:"normal", display:"block", marginTop:"10px"}}>Ongoing w/ comparison</span></td></tr></table></td></tr>
 						</table>
 
 					</td>
@@ -2218,6 +3389,7 @@ export default function Electroeval() {
 		</td>
 	</tr>
 </table>
+
 		 </div>
 		</div>
 	</>);
