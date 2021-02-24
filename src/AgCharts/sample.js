@@ -132,6 +132,8 @@ export default function ChartExample() {
     link.click();
     document.body.removeChild(link);
     handleButtonClick();
+    console.log("style", style)
+    console.log(html);
   }
 
   const exportAsPdf = () => {

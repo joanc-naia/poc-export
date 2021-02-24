@@ -71,9 +71,8 @@ export default function Electroeval() {
 		style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;\
 			margin: 1in 0.5in 1in 0.5in}\
 			div.Section1 {page: WordSection;}\
-			font-family: Arial, Helvetica, sans-serif;`
-		//TODO: fix page-breaks, etc -- need to convert inline styles to .css
-
+			font-family: Arial, Helvetica, sans-serif;\
+			.page-break{mso-special-character: line-break;page-break-before:always}`
 		const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\
 			<head>\
 				<meta charset='utf-8'>\
@@ -99,7 +98,8 @@ export default function Electroeval() {
 		link.click();
 		document.body.removeChild(link);
 		handleButtonClick();
-		// console.log(html)
+		console.log("style", style);
+		console.log("html", html)
 	}
 
 	const exportAsPdfImages2 = () => {
@@ -204,8 +204,8 @@ export default function Electroeval() {
 				<div className="dropdown">
 
 					<button onClick={exportAsWord2}>Export to Word</button>
-					<button onClick={exportAsPdfText}>Export to PDF text without page breaks</button>
-					<button onClick={exportAsPdfImages}>Export Report PDF image with page breaks</button>
+					{/* <button onClick={exportAsPdfText}>Export to PDF text without page breaks</button> */}
+					<button onClick={exportAsPdfImages}>Export Report PDF</button>
 					<button onClick={exportAsExcel2}>Export Report Excel (in progress)</button>
 				</div>
 				)}
