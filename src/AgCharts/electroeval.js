@@ -89,7 +89,7 @@ export default function Electroeval() {
 			</head><body style="tab-interval:.5in"><div class="Section1">`;
 		const postHtml = "</div></body></html>";
 
-		const html = `${preHtml}${document.getElementById('report').innerHTML}${postHtml}`;
+		const html = `${preHtml}${document.getElementById('report').outerHTML}${postHtml}`;
 
 		const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
 		let link = document.createElement('A');
