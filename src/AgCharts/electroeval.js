@@ -1,24 +1,24 @@
-import React, { useRef, useState, useEffect } from 'react';
-import * as ExcelJS from 'exceljs';
+import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import './sample.css';
-import extractCSS from "component-css-extractor";
 import html2pdf from 'html2pdf.js';
+/* eslint import/no-webpack-loader-syntax: off */
+import styleAsString from '!!raw-loader!./sample.css';
+import { createWorkbook } from './excel';
 
 export default function Electroeval() {
-  const ref1 = useRef();
 	const [open, setOpen] = useState(false);
 
 	const exportAsExcel2 = async () => {
-		const style = extractCSS(ref1.current);
 		const preHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">\
-		<xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>\
+		<xml><x:ExcelWorkbook><x:ExcelWorksheets>\
+			<x:ExcelWorksheet>\
 			<x:Name>Page1</x:Name>\
 			<x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>\
 		</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml>\
-		<head><style>${style}</style></head>\
+		<head><style>${styleAsString}</style></head>\
 		<body><table>`;
 		const postHtml = `</table></body></html>`;
 		const table = document.querySelector('#report table');
@@ -38,41 +38,20 @@ export default function Electroeval() {
 	}
 
 	const exportAsExcel = async () => {
-		//box: Wingdings o
-		//box check: Wingdings þ
-		//box shaded: Wingdings n
-
-		const settings = {views: [{showGridLines: false}]};
-		const defaultFont = {name: 'Arial'}
-		let workbook = new ExcelJS.Workbook();
-    let sheet1 = workbook.addWorksheet("Page1", settings);
-		sheet1.getCell('AO2').value = 'Electrofishing Evaluation Datasheet';
-		sheet1.getCell('AO2').font = { ...defaultFont, size: 14, bold: true, underline: true }
-		sheet1.getCell('DR3').value = 'PAGE 1';
-		sheet1.getCell('DR3').font = { ...defaultFont, size: 9 }
-
-
-		let sheet2 = workbook.addWorksheet("Page2", settings);
-		let sheet3 = workbook.addWorksheet("Page3", settings);
-		let sheet4 = workbook.addWorksheet("Page4", settings);
-		let sheet5 = workbook.addWorksheet("Page5", settings);
-		let sheet6 = workbook.addWorksheet("Page6", settings);
-
+		const workbook = createWorkbook();
 		const buf = await workbook.xlsx.writeBuffer();
-    saveAs(new Blob([buf]), 'Report.xlsx');
-    handleButtonClick();
+		saveAs(new Blob([buf]), 'Report.xlsx');
+		handleButtonClick();
 	}
 
 	const exportAsWord2 = async () => {
-		let style = extractCSS(ref1.current);
+		let style = styleAsString;
 		// A4 size: 841.95pt 595.35pt;
-  	// Letter size: 8.5in 11in;
+		// Letter size: 8.5in 11in;
 		// Legal size: 8.5in 14in;
 		style += `@page WordSection{size: 8.5in 11in;mso-page-orientation: portrait;\
-			margin: 1in 0.5in 1in 0.5in}\
-			div.Section1 {page: WordSection;}\
-			font-family: Arial, Helvetica, sans-serif;\
-			.page-break{mso-special-character: line-break;page-break-before:always}`
+			margin: 0.75in 0.5in 0.75in 0.5in}\
+			div.Section1 {page: WordSection;}`
 		const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\
 			<head>\
 				<meta charset='utf-8'>\
@@ -98,12 +77,11 @@ export default function Electroeval() {
 		link.click();
 		document.body.removeChild(link);
 		handleButtonClick();
-		console.log("style", style);
 		console.log("html", html)
 	}
 
 	const exportAsPdfImages2 = () => {
-    let doc = new jsPDF({
+		let doc = new jsPDF({
 			orientation: 'p',
 			unit: 'px',
 			format: 'letter',
@@ -206,14 +184,14 @@ export default function Electroeval() {
 					<button onClick={exportAsWord2}>Export to Word</button>
 					{/* <button onClick={exportAsPdfText}>Export to PDF text without page breaks</button> */}
 					<button onClick={exportAsPdfImages}>Export Report PDF</button>
-					<button onClick={exportAsExcel2}>Export Report Excel (in progress)</button>
+					<button onClick={exportAsExcel}>Export Report Excel (in progress)</button>
 				</div>
 				)}
 			</div>
 		</header>
 		<div className='report-container'>
-			<div id="report" ref={ref1}>
-    		<table border='0' width='100%' cellPadding='5' cellSpacing='0' className="page1">
+			<div id="report">
+				<table border='0' width='100%' cellPadding='5' cellSpacing='0' className="page1">
 	<tr>
 		<td valign='middle'>
 			<table border='0' width='100%' cellPadding='0' cellSpacing='0'>

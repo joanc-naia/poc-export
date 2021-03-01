@@ -1,11 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import './sample.css';
-import extractCSS from "component-css-extractor";
+/* eslint import/no-webpack-loader-syntax: off */
+import styleAsString from '!!raw-loader!./sample.css';
 
 // Source: https://www.gov.uk/government/statistical-data-sets/museums-and-galleries-monthly-visits
 var data = [
@@ -23,7 +24,6 @@ var data = [
 ];
 
 export default function ChartExample() {
-  const ref1 = useRef();
   const [options, setOptions] = useState({
     autoSize: true,
     data: data,
@@ -104,7 +104,7 @@ export default function ChartExample() {
    * mso-paper-source:0;
    */
   const exportAsWord = async() => {
-    let style = extractCSS(ref1.current);
+    let style = styleAsString;
     // A4 size: 841.95pt 595.35pt;
     // Letter size: 8.5in 11in;
     // Legal size: 8.5in 14in;
@@ -179,7 +179,7 @@ export default function ChartExample() {
       </div>
     </header>
 
-  <div className="chart" ref={ref1}>
+  <div className="chart">
     <table class="chart-table">
       <thead>
         <tr><th colSpan="2">{options.title.text}</th></tr>

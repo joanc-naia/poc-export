@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^12.7.1",
     "ag-charts-community": "^3.0.0",
     "ag-charts-react": "^3.0.0",
-    "component-css-extractor": "^1.0.0",
     "dompurify": "^2.2.6",
     "exceljs": "^4.2.0",
     "file-saver": "^2.0.5",
@@ -49,7 +48,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "raw-loader": "^4.0.2"
   },
   "homepage": "http://joanc-naia.github.io/poc-export"
 }
