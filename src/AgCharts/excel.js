@@ -12,9 +12,292 @@ export const createWorkbook = () => {
     let row, rowData, rowC, colNums, colWidths;
 
     let sheet1 = workbook.addWorksheet("Page1", settings);
+    row = sheet1.addRow([]);
+    row.height = 12;
+    row = sheet1.addRow([]);
+    row.height = 30;
+    rowData = [
+      [2, {value: 'Electrofishing Evaluation Datasheet', font: {...C.fontBold, size:15},
+      alignment: C.alignMiddleCenter}],
+      [24, {value: 'PAGE 1', font: {size:9}, border: C.borderAllMedium,
+        alignment: C.alignMiddleCenter}]
+    ];
+    C.addRowFromData(row, rowData)
+    C.mergeCellsFromData(sheet1, [`B2:W2`, `X2:Y2`]);
+    row = sheet1.addRow([]);
+    row.height = 12;
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [[2, {value: '', border:C.borderHeaderTop}]]);
+    C.mergeCellsFromData(sheet1, [`B4:Y4`]);
+
+    row = sheet1.addRow([]);
+    rowData = [
+      [2, {value: "", border: C.borderLeft}],
+      [3, {value: "Data Recorded By:"}], [7, {value: "Testing", border: C.borderBottomThin}],
+      [9, {value: "Data Entered By:", alignment: C.alignCenter}],
+      [12, {value: "Testing", border: C.borderBottomThin}],
+      [14, {value: "Plan Finisher:"}], [17, {value: "Testing", border: C.borderBottomThin}],
+      [21, {value: "Follow Up By:"}], [23, {value: "Testing", border: C.borderBottomThin}],
+      [25, {value: "", border: C.borderRight}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`C5:F5`, `G5:H5`, `I5:K5`, `N5:P5`, `Q5:R5`, `U5:V5`, `W5:X5`])
+
+    row = sheet1.addRow([]);
+    rowData = [
+      [2, {value: "", border: C.borderLeft}],
+      [3, {value: "Management Type:"}], [7, {value: "Testing", border: C.borderBottomThin}],
+      [14, {value: "Correspondence Type:"}], [18, {value: "Testing", border: C.borderBottomThin}],
+      [25, {value: "", border: C.borderRight}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`C6:F6`, `G6:L6`, `N6:Q6`, `R6:X6`]);
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [[2, {value: '', border:C.borderHeaderBottom}]]);
+    C.mergeCellsFromData(sheet1, [`B7:Y7`]);
+
+    row = sheet1.addRow([]);
+    row.height = 12;
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [[2, {value: '', border:C.borderHeaderTop}]]);
+    C.mergeCellsFromData(sheet1, [`B9:Y9`]);
+    [
+      ["Customer:", "Testing", "Date:", "Testing"],
+      ["Primary Contact:", "Testing", "Property Name:", "Testing"],
+      ["Primary Contact Type:", "Testing", "State/County:", "Testing"],
+      ["Work Phone:", "Testing", "Ext:", "Testing", "Primary Uses:", "Testing"],
+      ["Home Phone:", "Testing", "Fishing Goals:", "Testing"],
+      ["Cell Phone:", "Testing", "Property Type:", "Testing"],
+      ["Email:", "Testing"],
+    ].forEach(data=>{
+      row = sheet1.addRow([]);
+      rowData = [
+        [2, {value: "", border: C.borderLeft}],
+        [3, {value: data[0], font: C.fontBold}],
+        [7, {value: data[1], border: C.borderBottomThin}]
+      ]
+      if (data.length>2) {
+        if (data.length<6) {
+          rowData = rowData.concat([
+            [15, {value: data[2], font: C.fontBold}],
+            [18, {value: data[3], border: C.borderBottomThin}],
+          ])
+        } else {
+          rowData = rowData.concat([
+            [10, {value: data[2], font: C.fontBold}],
+            [12, {value: data[3], border: C.borderBottomThin}],
+            [15, {value: data[4], font: C.fontBold}],
+            [18, {value: data[5], border: C.borderBottomThin}],
+          ])
+        }
+      }
+      rowData.push([25, {value: "", border: C.borderRight}])
+      C.addRowFromData(row, rowData);
+    })
+    for (let i=10; i<=15; i++) {
+      if (i===13) continue;
+      C.mergeCellsFromData(sheet1, [`C${i}:F${i}`, `G${i}:M${i}`, `O${i}:Q${i}`, `R${i}:X${i}`])
+    }
+    C.mergeCellsFromData(sheet1, [`C13:F13`, `G13:I13`, `J13:K13`, `L13:M13`, `O13:Q13`,
+      `R13:X13`, `C16:F16`, `G16:M16`]);
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [[2, {value: '', border:C.borderHeaderBottom}]]);
+    C.mergeCellsFromData(sheet1, [`B17:Y17`]);
+
+    row = sheet1.addRow([]);
+    row.height = 12;
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [
+      [2, {value: '', border:C.borderHeaderTop}], [21, {value: '', border:C.borderHeaderTop}]
+    ]);
+    C.mergeCellsFromData(sheet1, [`B19:S19`, `U19:Y19`]);
+
+    row = sheet1.addRow([]);
+    rowData = [
+      [2, {value: "", border: C.borderLeft}],
+      [3, {value: "Pond Name:", font: C.fontBold}],
+      [7, {value: "Testing", border: C.borderBottomThin}],
+      [11, {value: "Acres:", font: C.fontBold, alignment: C.alignMiddleCenter}],
+      [13, {value: "Testing", border: C.borderBottomThin}],
+      [19, {value: "", border: C.borderRight}],
+      [21, {value: "GPS Coordinates", border:{...C.borderLeft, ...C.borderRight},
+        font: C.fontBold, alignment: C.alignMiddleCenter}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [[2, {value: '', border:C.borderHeaderBottom}]]);
+    C.mergeCellsFromData(sheet1, [`C20:F20`, `G20:J20`, `K20:L20`, `M20:R20`, `B21:S21`,
+      `U20:Y21`])
+
+    row = sheet1.addRow([]);
+    row.height = 12;
+    C.addRowFromData(row, [[21, {value: '', border:{...C.borderLeft, ...C.borderRight}}]]);
+    C.mergeCellsFromData(sheet1, [`U22:Y22`])
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [
+      [2, {value: '', border:C.borderHeaderTop}],
+      [21, {value: '', border:{...C.borderLeft, ...C.borderRight}}]
+    ]);
+    C.mergeCellsFromData(sheet1, [`B23:S23`, `U23:Y23`]);
+
+    row = sheet1.addRow([]);
+    rowData = [
+      [2, {value: "", border: C.borderLeft}],
+      [3, {value: "Recommended BG Harvest:", font: C.fontBold}],
+      [8, C.boxChecked], [9, {value: "Suspend"}],
+      [11, C.box], [12, {value: "Consumptive"}],
+      [14, C.box], [15, {value: "Unlimited"}],
+      [19, {value: "", border: C.borderRight}],
+      [21, {value: "N:", border:C.borderLeft, font: C.fontBold, alignment: C.alignMiddleCenter}],
+      [22, {value: "Testing", border: C.borderBottomThin}],
+      [25, {value: "", border: C.borderRight}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`C24:G24`, `I24:J24`, `O24:Q24`, `V24:X24`]);
+
+    row = sheet1.addRow([]);
+    rowData = [
+      [2, {value: "", border: C.borderLeft}],
+      [3, {value: "Recommended LMB Harvest:", font: C.fontBold}],
+      [8, C.boxChecked], [9, {value: "Yes"}],
+      [10, C.box], [11, {value: "No"}],
+      [12, {value: "Inch Group:"}],
+      [13, {value: "Testing", border: C.borderBottomThin}],
+      [16, {value: "Lbs/Acre:"}],
+      [18, {value: "Testing", border: C.borderBottomThin}],
+      [19, {value: "", border: C.borderRight}],
+      [21, {value: "W:", border:C.borderLeft, font: C.fontBold, alignment: C.alignMiddleCenter}],
+      [22, {value: "Testing", border: C.borderBottomThin}],
+      [25, {value: "", border: C.borderRight}],
+    ];
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`C25:G25`, `I25:J25`, `O25:Q25`, `V25:X25`]);
+
+    row = sheet1.addRow([]);
+    row.height = 8;
+    C.addRowFromData(row, [
+      [2, {value: '', border:C.borderHeaderBottom}], [21, {value: '', border:C.borderHeaderBottom}]
+    ]);
+    C.mergeCellsFromData(sheet1, [`B26:S26`, `U26:Y26`]);
+
+    row = sheet1.addRow([]);
+    row.height = 12;
+
+    row = sheet1.addRow([]);
+    C.addRowFromData(row, [
+      [2, {value: {richText:[
+        {font: {...C.defaultFont, ...C.fontRed}, text:'*'},
+        {font: C.defaultFont, text:'Level:Management Priority Level (1, 2, or 3) / '},
+        {font: {...C.defaultFont, ...C.fontRed}, text:'**'},
+        {font: C.defaultFont, text:'Status:Confirmed (C); Not Confirmed (NC); Done (DONE); Owner Responsibility (OR); Declined (D)'}
+      ]}, alignment: C.alignMiddleCenter}]
+    ]);
+    C.mergeCellsFromData(sheet1, [`B28:Y28`]);
+    row = sheet1.addRow([]);
+    row.height = 8;
+
+    row = sheet1.addRow([]);
+    let header = {font: {...C.fontBold, size:10}, border: C.borderAllMedium}
+    rowData = [
+      [2,{value: 'Order', ...header}],
+      [5,{value: 'Date', ...header}],
+      [7,{value: 'Recommended Activity', ...header}],
+      [16, {value: 'Qty', ...header}],
+      [18, {value: 'Unit', ...header}],
+      [20, {value: 'Price', ...header}],
+      [22, {value: 'Level *', ...header}],
+      [24, {value: 'Status **', ...header}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`B30:D30`, `E30:F30`,`G30:O30`, `P30:Q30`, `R30:S30`, `T30:U30`,
+      `V30:W30`, `X30:Y30`]);
+
+    row = sheet1.addRow([]); rowC=31;
+    rowData = [
+      [2,{value: 'Testing', border: C.borderBodyLeft}],
+      [5,{value: 'Testing', border: C.borderBodyMiddle}],
+      [7,{value: 'Testing', border: C.borderBodyMiddle}],
+      [16, {value: 'Testing', border: C.borderBodyMiddle}],
+      [18, {value: 'Testing', border: C.borderBodyMiddle}],
+      [20, {value: 'Testing', border: C.borderBodyMiddle}],
+      [22, {value: 'Testing', border: C.borderBodyMiddle}],
+      [24, {value: 'Testing', border: C.borderBodyRight}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`B${rowC}:D${rowC}`, `E${rowC}:F${rowC}`,`G${rowC}:O${rowC}`,
+      `P${rowC}:Q${rowC}`, `R${rowC}:S${rowC}`, `T${rowC}:U${rowC}`, `V${rowC}:W${rowC}`,
+      `X${rowC}:Y${rowC}`]);
+
+    row = sheet1.addRow([]); rowC++;
+    row.height = 12;
+
+    row = sheet1.addRow([]); rowC++;
+    row.height = 25
+    C.addRowFromData(row, [[2, {value: 'Send Management Plan To Information', fill: C.grayBG,
+      font: {...C.fontBold, size:11}, alignment: C.alignMiddleCenter, border: C.borderAllMedium}]]);
+    C.mergeCellsFromData(sheet1, [`B${rowC}:Y${rowC}`]);
+
+    row = sheet1.addRow([]); rowC++;
+    rowData = [
+      [2, {value: "Send To:", font: {...C.fontBold, size: 10}, border: C.borderAllMedium}],
+      [13, {value: "Send To:", font: {...C.fontBold, size: 10}, border: C.borderAllMedium}]
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`B${rowC}:L${rowC}`, `M${rowC}:Y${rowC}`]);
+
+    row = sheet1.addRow([]); rowC++;
+    row.height = 36;
+    rowData = [
+      [2, {value: "Mr. Grady  Elder, 4397 Bahia Ln., Destin, FL  32541", font: {size: 9},
+        border: C.borderAllMedium, alignment: C.alignMiddle}],
+      [13, {value: "", font: {size: 9}, border: C.borderAllMedium}]
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`B${rowC}:L${rowC}`, `M${rowC}:Y${rowC}`]);
+
+    row = sheet1.addRow([]); rowC++;
+    rowData = [
+      [2, {value: '', border: C.borderLeft}],
+      [3, C.boxChecked], [4, {value: 'Bound'}],
+      [6, C.box], [7, {value: 'Unbound'}],
+      [8, C.box], [9, {value: 'Email PDF?'}],
+      [11, C.box], [12, {value: 'Cover Letter?', border: C.borderRight}],
+      [14, C.boxChecked], [15, {value: 'Bound'}],
+      [17, C.box], [18, {value: 'Unbound'}],
+      [20, C.box], [21, {value: 'Email PDF?'}],
+      [23, C.box], [24, {value: 'Cover Letter?', border: C.borderRight}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet1, [`D${rowC}:E${rowC}`, `I${rowC}:J${rowC}`, `O${rowC}:P${rowC}`,
+      `U${rowC}:V${rowC}`, `X${rowC}:Y${rowC}`]);
+
+    row = sheet1.addRow([]); rowC++;
+    C.addRowFromData(row, [
+      [2, {value: 'Consulter With: Testing', border: C.borderAllMedium,
+        font: {...C.fontBold, size:9}}]
+    ])
+    C.mergeCellsFromData(sheet1, [`B${rowC}:Y${rowC}`])
+
+    colWidths = [1.4, 0.7, 3, 2.9, 9, 3.7, 8.5, 3.2, 5.2, 3.9, 3.3, 12.5, 1, 2.9, 2.7, 7.3, 3.7, 10, 0.9, 3, 7.2, 4.7, 3.9, 11.1, 0.9];
+    C.setColWidths(sheet1, colWidths)
 
 
     let sheet2 = workbook.addWorksheet("Page2", settings);
+
+
+    //
 
 
     let sheet3 = workbook.addWorksheet("Page3", settings);
@@ -370,6 +653,7 @@ export const createWorkbook = () => {
     colWidths = [1, 1.9, 5.5, 2.5, 2.2, 2.5, 5, 5.2, 1.3, 3.2, 5.3, 2.9, 1.9, 4.6, 5.2, 4.8, 5.5, 2.6, 1.9, 5.6, 4.6, 4.5, 3.2, 1.5, 3.8, 4.6, 4.6, 4.9, 3.8, 1];
     C.setColWidths(sheet3, colWidths);
 
+
     let sheet4 = workbook.addWorksheet("Page4", settings);
     row = sheet4.addRow([]);
     row.height = 12;
@@ -460,6 +744,7 @@ export const createWorkbook = () => {
 
     colWidths = [1, 8.5, 2.5, 8.5, 5.9, 6.6, 1.5, 4.5, 6.5, 5.2, 11.6, 5.7, 0.9, 4.5, 1.3, 11.8, 6.6, 1.3, 8.5];
     C.setColWidths(sheet4, colWidths);
+
 
     let sheet5 = workbook.addWorksheet("Page5", settings);
 
