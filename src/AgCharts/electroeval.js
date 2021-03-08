@@ -1353,284 +1353,284 @@ export default function Electroeval() {
 								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>1 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>3 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>4 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>5 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>6 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>7 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>8 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>9 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>10 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>11 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>12 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>13 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>14 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>15 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>16 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>17 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>18 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>19 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>20 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>23 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>21 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>24 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>22 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>25 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>26 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>27 -</td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
 							</tr>
 							<tr>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
-								<td align='center' style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
+								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}></td>
 							</tr>
 						</table>
 					</td>

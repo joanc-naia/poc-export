@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import ChartExample from './AgCharts/sample';
 import Electroeval from './AgCharts/electroeval';
+import ElectroevalGraph from './AgCharts/electroevalgraph';
 
 import {
   BrowserRouter as Router,
@@ -14,7 +14,7 @@ function App() {
   return (
     <HashRouter basename='/'>
       <Switch>
-        <Route path="/chart"><ChartExample /></Route>
+        <Route path="/chart"><ElectroevalGraph /></Route>
         <Route path="/"><Electroeval /></Route>
       </Switch>
     </HashRouter>
