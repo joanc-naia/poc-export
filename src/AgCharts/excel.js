@@ -5,7 +5,7 @@ export const createWorkbook = () => {
     const settings = {
       views: [{showGridLines: false}],
       pageSetup: { fitToPage: true, fitToWidth: 1,
-        margins: {left: 0.5, right: 0.5,top: 0.75, bottom: 0.75, header: 0, footer: 0}
+        margins: {left: 0.25, right: 0.25,top: 0.75, bottom: 0.75, header: 0, footer: 0}
       }
     };
     let workbook = new ExcelJS.Workbook();
@@ -173,9 +173,9 @@ export const createWorkbook = () => {
       [3, {value: "Recommended LMB Harvest:", font: C.fontBold}],
       [8, C.boxChecked], [9, {value: "Yes"}],
       [10, C.box], [11, {value: "No"}],
-      [12, {value: "Inch Group:"}],
+      [12, {value: "Inch Group:", alignment: C.alignCenter}],
       [13, {value: "Testing", border: C.borderBottomThin}],
-      [16, {value: "Lbs/Acre:"}],
+      [16, {value: "Lbs/Acre:", alignment: C.alignCenter}],
       [18, {value: "Testing", border: C.borderBottomThin}],
       [19, {value: "", border: C.borderRight}],
       [21, {value: "W:", border:C.borderLeft, font: C.fontBold, alignment: C.alignMiddleCenter}],
@@ -183,7 +183,7 @@ export const createWorkbook = () => {
       [25, {value: "", border: C.borderRight}],
     ];
     C.addRowFromData(row, rowData);
-    C.mergeCellsFromData(sheet1, [`C25:G25`, `I25:J25`, `O25:Q25`, `V25:X25`]);
+    C.mergeCellsFromData(sheet1, [`C25:G25`, `M25:O25`, `P25:Q25`, `V25:X25`]);
 
     row = sheet1.addRow([]);
     row.height = 8;
@@ -295,9 +295,287 @@ export const createWorkbook = () => {
 
 
     let sheet2 = workbook.addWorksheet("Page2", settings);
+    row = sheet2.addRow([])
+    row.height = 12;
+    row = sheet2.addRow([]);
+    row.height = 26;
+    rowData = [
+      [2, { value: "Client:", font: C.fontBold}],
+      [3, { value: "Testing", border: C.borderBottomThin}],
+      [6, { value: "Pond Name:", font: C.fontBold, alignment: C.alignCenter}],
+      [10, { value: 'Testing', border: C.borderBottomThin}],
+      [17, { value: 'Date:', font: C.fontBold}],
+      [18, { value: 'Testing', border: C.borderBottomThin}],
+      [23, { value: 'PAGE 2', font: {size: 9}, border: C.borderAllMedium, alignment: C.alignMiddleCenter}]
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, ['C2:E2','F2:I2', 'J2:O2', 'R2:U2', 'W2:X2']);
 
+    row = sheet2.addRow([]);
+    row.height = 12;
+    row = sheet2.addRow([]);
+    C.addRowFromData(row, [[2, {value: 'Pond Assessment / Water Control / Physical Characteristics',
+      font: {...C.fontBoldUnderline, size: 11}}]]);
+    C.mergeCellsFromData(sheet2, ['B4:X4']);
+    row = sheet2.addRow([]);
+    row.height = 12;
 
-    //
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Date of Impoundment:', font: C.fontBold}],
+      [6, {value: 'Testing', border: C.borderBottomThin}],
+      [11, {value: 'Dam Type:', font: C.fontBold}],
+      [14, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Condition:', font: C.fontBold}],
+      [22, {value: 'Testing', border: C.borderBottomThin}]
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, [`B6:E6`, `F6:I6`, `K6:M6`, `N6:Q6`, `S6:U6`, `V6:X6`]);
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Emergency Spillway:', font: C.fontBold}],
+      [6, C.boxChecked], [7, {value:'Yes'}],
+      [8, C.box], [9, {value:'No'}],
+      [12, {value: 'Spillway Material:', font: C.fontBold}],
+      [15, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Condition:', font: C.fontBold, alignment: C.alignCenter}],
+      [22, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, [`B7:E7`, `L7:N7`, `O7:R7`, `S7:U7`, `V7:X7`]);
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Mechanical Spillway:', font: C.fontBold}],
+      [6, C.boxChecked], [7, {value:'Yes'}],
+      [8, C.box], [9, {value:'No'}],
+      [11, {value: 'Diameter (in):', font: C.fontBold}],
+      [14, {value: 'Testing', border: C.borderBottomThin}],
+      [15, {value: 'Material:', font: C.fontBold, alignment: C.alignCenter}],
+      [18, {value: 'Testing', border: C.borderBottomThin}],
+      [21, {value: 'Condition:', font: C.fontBold}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, [`B8:E8`, `K8:M8`, `O8:Q8`, `R8:S8`, `U8:W8`]);
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Trash Rack:', font: C.fontBold}],
+      [6, C.boxChecked], [7, {value:'Yes'}],
+      [8, C.box], [9, {value:'No'}],
+      [11, {value: 'Diameter (in):', font: C.fontBold}],
+      [14, {value: 'Testing', border: C.borderBottomThin}],
+      [15, {value: 'Material:', font: C.fontBold, alignment: C.alignCenter}],
+      [18, {value: 'Testing', border: C.borderBottomThin}],
+      [21, {value: 'Condition:', font: C.fontBold}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, [`B9:E9`, `K9:M9`, `O9:Q9`, `R9:S9`, `U9:W9`]);
+    row = sheet2.addRow([]);
+    row.height = 12;
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Water Source:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+      [9, {value: 'Water Characteristics', font: {...C.fontBoldUnderline, size: 11},
+        alignment: C.alignMiddleCenter}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Depth:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Topography:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+      [9, {value: 'Fertility Level:', font: C.fontBold}],
+      [15, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Soil Type:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+      [9, {value: 'Plankton Bloom:', font: C.fontBold}],
+      [15, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Landscape:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+      [9, {value: 'Suspended Solids:', font: C.fontBold}],
+      [15, {...C.boxChecked, alignment: C.alignRightMiddle}], [17, {value:'Yes'}],
+      [19, {...C.box, alignment: C.alignRightMiddle}], [21, {value:'No'}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Soil Condition:', font: C.fontBold}],
+      [4, {value: 'Testing', border: C.borderBottomThin}],
+      [9, {value: 'Water Level:', font: C.fontBold}],
+      [15, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    for (let i=11; i<=16; i++) {
+      C.mergeCellsFromData(sheet2, [`B${i}:C${i}`, `D${i}:F${i}`])
+      if (i>12) {
+        C.mergeCellsFromData(sheet2, [`I${i}:N${i}`]);
+        if (i!==15) C.mergeCellsFromData(sheet2, [`O${i}:V${i}`]);
+      }
+    }
+    C.mergeCellsFromData(sheet2, [`I11:V12`, `O15:P15`, `S15:T15`]);
+
+    row = sheet2.addRow([]);
+    row.height = 12;
+    row = sheet2.addRow([]);
+    C.addRowFromData(row, [[2, {value: 'Pond Management History',
+      font: {...C.fontBoldUnderline, size: 11}}]]);
+    C.mergeCellsFromData(sheet2, ['B18:X18']);
+    row = sheet2.addRow([]);
+    row.height = 12;
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Fish Harvest:', font: C.fontBold}],
+      [4, {value: 'Bass', font: C.fontBold}],
+      [8, {value: 'Testing', border: C.borderBottomThin}],
+      [15, {value: 'Annual Pounds Removed:', font: C.fontBold}],
+      [23, {value: 'Testing', border: C.borderBottomThin}]
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [4, {value: 'Bluegill', font: C.fontBold}],
+      [8, {value: 'Testing', border: C.borderBottomThin}]
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [4, {value: 'Other (specify)', font: C.fontBold}],
+      [8, {value: 'Testing', border: C.borderBottomThin}],
+      [12, {value: 'None / Limited / Moderate / Adequate / Excessive'}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Liming:', font: C.fontBold}],
+      [3, {value: 'Testing', border: C.borderBottomThin}],
+      [6, {value: 'Last Limed (year):', alignment: C.alignCenter}],
+      [11, {value: 'Testing', border: C.borderBottomThin}],
+      [14, {value: 'Qty (tons):', alignment: C.alignRight}],
+      [17, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Did we apply lime?', alignment: C.alignRight}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Fertilizing:', font: C.fontBold}],
+      [3, {value: 'Testing', border: C.borderBottomThin}],
+      [14, {value: 'Type:', alignment: C.alignRight}],
+      [17, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Do we fertilize?', alignment: C.alignRight}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Feeding:', font: C.fontBold}],
+      [3, {value: 'Testing', border: C.borderBottomThin}],
+      [14, {value: 'Type:', alignment: C.alignRight}],
+      [17, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Qty (feeders):', alignment: C.alignRight}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Structure:', font: C.fontBold}],
+      [3, {value: 'Testing', border: C.borderBottomThin}],
+      [14, {value: 'Type:', alignment: C.alignRight}],
+      [17, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Qty (feeders):', alignment: C.alignRight}],
+      [24, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Initial Fish Stocking:', font: C.fontBold}],
+      [6, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Recent Fish Stocking:', font: C.fontBold}],
+      [8, {value: 'Year:', font: C.fontBold, alignment: C.alignRight}],
+      [11, {value: 'Testing', border: C.borderBottomThin}],
+      [14, {value: 'Source:', font: C.fontBold, alignment: C.alignRight}],
+      [17, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'Species:', font: C.fontBold, alignment: C.alignRight}],
+      [23, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+    row = sheet2.addRow([]);
+    C.addRowFromData(row, [[2, {value: '(from sources other than SEPM)', font: {size:7}}]]);
+    row = sheet2.addRow([]);
+    row.height = 12;
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Grass Carp:', font: C.fontBold}],
+      [5, {value: 'Testing', border: C.borderBottomThin}],
+      [8, {value: 'Number Stocked:', font: C.fontBold, alignment: C.alignCenter}],
+      [14, {value: 'Testing', border: C.borderBottomThin}],
+      [19, {value: 'When:', font: C.fontBold, alignment: C.alignCenter}],
+      [22, {value: 'Testing', border: C.borderBottomThin}],
+    ]
+    C.addRowFromData(row, rowData);
+
+    C.mergeCellsFromData(sheet2, [`B20:C20`, `D20:G20`, `H20:J20`, `O20:U20`, `W20:X20`,
+    `D21:G21`, `H21:J21`, `D22:G22`, `H22:J22`, `L22:U22`,
+    `C23:E23`, `F23:J23`, `K23:L23`, `N23:O23`, `Q23:R23`, `S23:V23`,
+    `C24:L24`, `N24:O24`, `Q24:R24`, `S24:V24`,
+    `C25:L25`, `N25:O25`, `Q25:R25`, `S25:V25`, `C26:L26`, `N26:O26`, `Q26:X26`,
+    `B27:E27`, `F27:X27`, `B28:G28`, `H28:I28`, `K28:L28`, `N28:O28`, `S28:U28`, `W28:X28`,
+    `B29:G29`, `B31:D31`, `E31:G31`, `H31:M31`, `N31:Q31`, `S31:U31`, `V31:X31`
+    ])
+
+    row = sheet2.addRow([]);
+    row.height = 12;
+
+    row = sheet2.addRow([]);
+    rowData = [
+      [2, {value: 'Aquatic Weeds Observed', font: C.fontBold, border: C.borderHeaderTopLeft,
+        alignment: C.alignMiddleCenter}],
+      [11, {value: 'Coverage', font: C.fontBold, border: C.borderHeaderMiddle,
+        alignment: C.alignMiddleCenter}],
+      [18, {value: '% Percentage', font: C.fontBold, border: C.borderHeaderTopRight,
+        alignment: C.alignMiddleCenter}],
+    ]
+    C.addRowFromData(row, rowData);
+    C.mergeCellsFromData(sheet2, [`B33:J33`, `K33:Q33`, `R33:X33`]);
+    rowC =  34;
+    for (let i=0;i<8;i++) {
+      row = sheet2.addRow([]);
+      C.addRowFromData(row, [
+        [2, {value: '', border: C.borderAll}],
+        [11, {value: '', border: C.borderAll}],
+        [18, {value: '', border: C.borderAll}]
+      ]);
+      C.mergeCellsFromData(sheet2, [
+        `B${rowC}:J${rowC}`, `K${rowC}:Q${rowC}`, `R${rowC}:X${rowC}`]);
+      rowC++;
+    }
+
+    colWidths = [2, 10, 4, 3, 3, 3, 6, 4, 2, 1.5, 2.5, 5, 5, 7, 2, 2, 7, 2, 6, 3, 5, 3, 2, 8]
+    C.setColWidths(sheet2, colWidths)
 
 
     let sheet3 = workbook.addWorksheet("Page3", settings);
