@@ -184,7 +184,7 @@ export default function Electroeval() {
 					<button onClick={exportAsWord2}>Export to Word</button>
 					{/* <button onClick={exportAsPdfText}>Export to PDF text without page breaks</button> */}
 					<button onClick={exportAsPdfImages}>Export Report PDF</button>
-					<button onClick={exportAsExcel}>Export Report Excel (in progress)</button>
+					<button onClick={exportAsExcel}>Export Report Excel</button>
 				</div>
 				)}
 			</div>
