@@ -3,7 +3,7 @@ import { AgChartsReact } from 'ag-charts-react';
 import * as ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import html2pdf from 'html2pdf.js';
 import './sample.css';
 /* eslint import/no-webpack-loader-syntax: off */
 import styleAsString from '!!raw-loader!./sample.css';
@@ -44,7 +44,7 @@ export default function ElectroevalGraph() {
     data: dataElderPondPopulation,
     title: {
       text: 'Elder Pond',
-      fontSize: 18,
+      fontSize: 13,
     },
     subtitle: {
       text: 'Bass Population - 2021',
@@ -69,32 +69,64 @@ export default function ElectroevalGraph() {
   const [open, setOpen] = useState(false);
 
   const exportAsExcel = async () => {
+    const settings = {
+      views: [{showGridLines: false}],
+      pageSetup: { fitToPage: true, fitToWidth: 1,
+        margins: {left: 0.25, right: 0.25,top: 0.75, bottom: 0.75, header: 0, footer: 0}
+      }
+    };
     let workbook = new ExcelJS.Workbook();
-    let sheet = workbook.addWorksheet("ElectroEvalGraph");
-    let row = sheet.addRow([]);
+    let row, rowData, rowC, colNums, colWidths;
+
+    let sheet = workbook.addWorksheet("ElectroEvalGraph", settings);
+
+    row = sheet.addRow([]); row.height = 12;
     row = sheet.addRow([]);
     C.addRowFromData(row, [
-      [2, {value: 'Sample Size', font: C.fontBold, fill: C.grayBG, border: C.borderAllMedium,
-      alignment: C.alignCenter}],
-      [3, {value: 'Mean Length', font: C.fontBold, fill: C.grayBG, border: C.borderAllMedium,
-      alignment: C.alignCenter}]
+      [2, {value: 'Sample Size', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [3, {value: 'Mean Length', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [5, {value: 'Shock Time', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [6, {value: 'Sample Size', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [7, {value: 'CPUE (#/hr)', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [8, {value: 'Mean Length', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [9, {value: 'Mean Weight', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
+      [10, {value: 'Mean Wr', font: C.fontBold, border: C.borderAllMedium, alignment: C.alignCenter}],
     ]);
     row = sheet.addRow([]);
     C.addRowFromData(row, [
       [2, {value: '46', border: C.borderAll, alignment: C.alignCenter}],
-      [3, {value: '7.18', border: C.borderAll, alignment: C.alignCenter}]
+      [3, {value: '7.18', border: C.borderAll, alignment: C.alignCenter}],
+      [5, {value: '1012', border: C.borderAll, alignment: C.alignCenter}],
+      [6, {value: '6', border: C.borderAll, alignment: C.alignCenter}],
+      [7, {value: '60.47', border: C.borderAll, alignment: C.alignCenter}],
+      [8, {value: '10.85', border: C.borderAll, alignment: C.alignCenter}],
+      [9, {value: '0.45', border: C.borderAll, alignment: C.alignCenter}],
+      [10, {value: '68.83', border: C.borderAll, alignment: C.alignCenter}]
     ])
 
-    const canvas=document.querySelector('.chart canvas');
-    const chartImg = workbook.addImage({
-      base64: canvas.toDataURL(),
+    row = sheet.addRow([]); row.height = 8;
+    row = sheet.addRow([]); row.height = 170;
+    row = sheet.addRow([]); row.height = 20;
+    row = sheet.addRow([]); row.height = 170;
+
+    const chart1 = document.querySelector('.chart1 canvas');
+    const chart2 = document.querySelector('.chart2 canvas');
+    const chart3 = document.querySelector('.chart3 canvas');
+    const chart1Img = workbook.addImage({
+      base64: chart1.toDataURL(),
       extension: 'png',
     });
-    // workbook.worksheets[0].addImage(chartImg, 'B4:P15');
-    sheet.addImage(chartImg, {
-      tl: {col: 1, row: 5},
-      ext: {width: 720, height: 300}
+    const chart2Img = workbook.addImage({
+      base64: chart2.toDataURL(),
+      extension: 'png',
     });
+    const chart3Img = workbook.addImage({
+      base64: chart3.toDataURL(),
+      extension: 'png',
+    });
+    sheet.addImage(chart1Img, 'B5:C5');
+    sheet.addImage(chart2Img, 'E5:J5');
+    sheet.addImage(chart3Img, 'B7:C7');
 
     C.setColWidths(sheet, [1, 32, 32])
 
@@ -109,6 +141,10 @@ export default function ElectroevalGraph() {
    * mso-paper-source:0;
    */
   const exportAsWord = async() => {
+    const chart1 = document.querySelector('.chart1 canvas');
+    const chart2 = document.querySelector('.chart2 canvas');
+    const chart3 = document.querySelector('.chart3 canvas');
+
     let style = styleAsString;
     // A4 size: 841.95pt 595.35pt;
     // Letter size: 8.5in 11in;
@@ -124,10 +160,22 @@ export default function ElectroevalGraph() {
         <style>${style}</style>\
       </head><body style="tab-interval:.5in"><div class="Section1 chart">`;
     const postHtml = "</div></body></html>";
-    const table = document.querySelector('.chart table').outerHTML;
-    const canvas = document.querySelector('.chart canvas');
-    const content = `${table}<br/><img width=600 src="${canvas.toDataURL()}" />`
-    const html = `${preHtml}${content}${postHtml}`;
+    const pageHTML = `<div style="width:800px;text-align:center">\
+    <table width="100%" cellpadding="0" cellspacing="10">\
+      <tr>\
+        <td>${document.querySelector('.table1').outerHTML}</td>\
+        <td>${document.querySelector('.table2').outerHTML}</td>\
+      </tr>\
+      <tr>\
+        <td><img width="390" src="${chart1.toDataURL()}" style="border:1px solid black" /></td>\
+        <td><img width="390" src="${chart2.toDataURL()}" style="border:1px solid black" /></td>\
+      </tr>\
+      <tr>\
+        <td><img width="390" src="${chart3.toDataURL()}" style="border:1px solid black" /></td>\
+      </tr>\
+    </table>\
+    </div>`;
+    const html = `${preHtml}${pageHTML}${postHtml}`;
 
     const url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
     let link = document.createElement('A');
@@ -137,26 +185,34 @@ export default function ElectroevalGraph() {
     link.click();
     document.body.removeChild(link);
     handleButtonClick();
-    console.log("style", style)
-    console.log(html);
   }
 
   const exportAsPdf = () => {
-    let doc = new jsPDF('p', 'mm', 'letter');
+    const chart1 = document.querySelector('.chart1 canvas');
+    const chart2 = document.querySelector('.chart2 canvas');
+    const chart3 = document.querySelector('.chart3 canvas');
+    const pageHTML = `<div style="width:800px;text-align:center">\
+    <table width="100%" cellpadding="0" cellspacing="10">\
+      <tr>\
+        <td>${document.querySelector('.table1').outerHTML}</td>\
+        <td>${document.querySelector('.table2').outerHTML}</td>\
+      </tr>\
+      <tr>\
+        <td><img width="390" src="${chart1.toDataURL()}" style="border:1px solid black" /></td>\
+        <td><img width="390" src="${chart2.toDataURL()}" style="border:1px solid black" /></td>\
+      </tr>\
+      <tr>\
+        <td><img width="390" src="${chart3.toDataURL()}" style="border:1px solid black" /></td>\
+      </tr>\
+    </table>\
+    </div>`;
 
-    const canvas = document.querySelector('.chart canvas');
-    html2canvas(document.querySelector('.chart table')).then(tableCanv => {
-      const imgData = tableCanv.toDataURL('image/png');
-      const imgWidth = 50;
-      const imgHeight = (tableCanv.height * imgWidth) / tableCanv.width;
-      doc.addImage(imgData, 'PNG', 70, 10, imgWidth, imgHeight);
-      const chartData = canvas.toDataURL('image/png');
-      const chartWidth = 180;
-      const chartHeight = (canvas.height * chartWidth) / canvas.width
-      doc.addImage(chartData, 'PNG', 20, imgHeight + 30, chartWidth, chartHeight)
-      doc.save('download.pdf');
-    })
-    handleButtonClick();
+    html2pdf(pageHTML, {
+			filename: 'Report.pdf',
+			jsPDF: { unit: 'px', format: 'letter', hotfixes: ["px_scaling"] },
+			margin: [20,5]
+		})
+		handleButtonClick();
   }
 
   const handleButtonClick = () => {
@@ -185,18 +241,73 @@ export default function ElectroevalGraph() {
     </header>
 
   <div className="chart">
-    <table>
-      <thead><tr>
-        <th>Sample Size</th>
-        <th>Mean Length</th>
-      </tr></thead>
-      <tbody>
-        <tr><td>46</td><td>7.18</td></tr>
-      </tbody>
+    <table width='100%' cellPadding='0' cellSpacing='30'>
+      <tr>
+        <td>
+          <table width='100%' cellPadding='0' cellSpacing='0'>
+            <tr>
+              <td>
+              <table className="table1" width='100%' cellPadding='5' cellSpacing='0' border='1' bordercolor='#000'>
+                <thead>
+                  <tr>
+                    <th>Sample Size</th>
+                    <th>Mean Length</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>46</td><td>7.18</td></tr>
+                </tbody>
+              </table>
+              </td>
+            </tr>
+            <tr>
+              <td className="chart1">
+                <AgChartsReact options={options} />
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table width='100%' cellPadding='0' cellSpacing='0'>
+            <tr>
+              <td>
+              <table className="table2" width='100%' cellPadding='5' cellSpacing='0' border='1' bordercolor='#000'>
+                <thead>
+                  <tr>
+                    <th>Shock Time</th>
+                    <th>Sample Size</th>
+                    <th>CPUE (#/hr)</th>
+                    <th>Mean Length</th>
+                    <th>Mean Weight</th>
+                    <th>Mean Wr</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1012</td>
+                    <td>6</td>
+                    <td>60.47</td>
+                    <td>10.85</td>
+                    <td>0.45</td>
+                    <td>68.83</td>
+                  </tr>
+                </tbody>
+              </table>
+              </td>
+            </tr>
+            <tr>
+              <td className="chart2" >
+              <AgChartsReact options={options} />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td className="chart3"><AgChartsReact options={options} /></td>
+      </tr>
     </table>
-    <br/>
-    <AgChartsReact options={options} />
-  </div>
+   </div>
 
   </>);
 }

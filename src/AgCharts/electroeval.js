@@ -1343,14 +1343,14 @@ export default function Electroeval() {
 					<td>
 						<table  style={{border:"2px solid #000"}} width='100%' bordercolor='#000' cellPadding='5' cellSpacing='0'>
 							<tr>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Shellcracker<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Threadfin shad<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Crappie<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Catfish<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gizzard Shad<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gold. Shiner<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
-								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:___________<br /><small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Shellcracker <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Threadfin shad <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Crappie <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Catfish <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gizzard Shad <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Gold. Shiner <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:________ <br /> <small>Length(Inches)</small></th>
+								<th style={{fontSize:"12px", fontFamily:"Arial", fontWeight:"bold",  borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>Other:________ <br /> <small>Length(Inches)</small></th>
 							</tr>
 							<tr>
 								<td style={{fontFamily:"Arial", fontSize:"12px", borderTop:"1px solid #000", borderLeft:"1px solid #000"}}>2 -</td>
